@@ -1,0 +1,265 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #fff;
+  color: #333;
+}
+
+.banner-text {
+  flex: 1;
+  text-align: left;
+}
+
+.banner-text h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.banner-v {
+  font-size: 5rem;
+  font-weight: bold;
+  position: absolute; /* Make the V element absolute for positioning */
+  top: 42%; /* Position V vertically in the middle */
+  left: 37%; /* Position V horizontally in the middle */
+  transform: translate(-50%, -50%);
+}
+
+.banner-v span {
+  transform: rotate(-45deg);
+  color: #1c6ed0;
+  font-size: 28px;
+  font-weight: 800;
+  font-style: normal;
+  font-family: "Margarine", sans-serif;
+}
+
+.search-bar {
+  border-radius: 25px;
+  border: 1px solid black;
+  width: 500px;
+  height: 50px;
+  font-size: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.search-bar::placeholder {
+  color: rgba(0, 0, 0, 0.485);
+  font-weight: 100;
+}
+
+.select-container {
+  position: relative;
+}
+
+.select-container select {
+  /* Hide the default arrow */
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  padding-right: 10px; /* Add some padding to make space for the arrow */
+
+  /* Add your custom arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 5px center; /* Adjust the position as needed */
+  background-size: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+  /* Styles for screens less than or equal to 768px wide (mobile view) */
+  .banner-v {
+    /* Adjust positioning for mobile */
+    top: calc(32% - 0.7em); /* Adjust vertical positioning */
+    left: calc(50% - 1em); /* Adjust horizontal positioning */
+    font-size: 3rem;
+  }
+
+  .banner-text h1 {
+    text-align: center;
+    font-size: 2rem; /* Decrease font size for mobile */
+  }
+
+  .banner-text-future {
+    margin-left: -20%;
+  }
+
+  .banner h3 {
+    font-size: 1.2rem;
+  }
+
+  .search-bar {
+    width: 110%;
+    margin-top: -20px;
+  }
+
+  .input-container {
+    width: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-field {
+    // width: 1000px;
+    // width: calc(100% - 20%);
+    width: 240px !important;
+    height: 40px;
+    padding-right: 40% !important;
+  }
+
+  //   .input-field,
+  //   .input-button {
+  // height: 40px;
+  // flex: 1;
+  // width: 100%; /* Make each element full width on mobile */
+  //   }
+
+  .input-button {
+    border: "none";
+    background-color: "#1c6ed0";
+    color: "#fff";
+    border-radius: "0 50px 50px 0";
+    height: 40px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+
+.cell {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Define a class for the boxes */
+.box-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Define a class for the range container */
+.range-shadow {
+  box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.3);
+}
+
+// @media only screen and (min-width: 968px) {
+//   /* Styles for screens less than or equal to 768px wide (mobile view) */
+//   .banner-v {
+//     /* Adjust positioning for mobile */
+//     top: calc(40% - 0.7em); /* Adjust vertical positioning */
+//     left: calc(30% - 1em); /* Adjust horizontal positioning */
+//   }
+// }
+
+.strikethrough {
+  text-decoration: none; /* Remove default line-through */
+  position: relative; /* Make container relative for absolute positioning */
+}
+
+.strikethrough::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 10px; /* Desired thickness */
+  transform: translateY(-50%) rotate(-18deg); /* Adjust rotation as needed */
+  background-color: #1c6ed0;
+  border-radius: 5px; /* Set border-radius */
+}
+
+// .input-container {
+//   display: flex; /* Allow elements to sit side-by-side */
+//   border: 1px solid black; /* Simulate an input field border */
+//   border-radius: 25px;
+// }
+
+// .input-button {
+//   background-color: #1c6ed0;
+//   color: white;
+//   padding: 5px 10px;
+//   cursor: pointer;
+//   border: none;
+//   border-radius: 25px;
+//   font-weight: bold;
+// }
+
+.input-field::placeholder {
+  color: rgba(0, 0, 0, 0.485);
+  font-weight: 100;
+}
+
+.input-field {
+  width: 500px;
+  height: 50px;
+}
+
+.input-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin: 5px;
+  padding: 10px;
+  height: calc(100% - 10px);
+}
+
+.slider-container {
+  margin: 50px auto;
+  width: 100%;
+  text-align: center;
+}
+
+.slider-content {
+  margin-bottom: 20px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 10px;
+  border-radius: 5px;
+  background: blue;
+  outline: none;
+  margin-top: 20px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid blue;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid blue;
+  cursor: pointer;
+}
+
+.sliderbox-container {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 500px; /* Adjust max-width for responsiveness */
+  margin: 0 auto; /* Center the container horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+}

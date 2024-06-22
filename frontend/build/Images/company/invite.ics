@@ -1,0 +1,96 @@
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:Microsoft Exchange Server 2010
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:India Standard Time
+BEGIN:STANDARD
+DTSTART:16010101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ORGANIZER;CN=Tanya Upreti:mailto:tanya.upreti@e2eresearch.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=sanjaymehr
+ a111@gmail.com:mailto:sanjaymehra111@gmail.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Gaurav Jai
+ n:mailto:gaurav.jain@e2eresearch.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Gaurav Sek
+ hri:mailto:gaurav.sekhri@e2eresearch.com
+ATTENDEE;ROLE=OPT-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Neelima Kh
+ atri:mailto:neelima.khatri@e2eresearch.com
+ATTENDEE;ROLE=OPT-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Sharawan S
+ harma:mailto:sharawan.sharma@e2eresearch.com
+DESCRIPTION;LANGUAGE=en-US:Hi Sanjay\,\n\n\nKindly be available through lap
+ top only with the downloaded application of M-Teams.\n\n\nThanks\,\nTanya\
+ n\n\n\n___________________________________________________________________
+ _____________\nMicrosoft Teams meeting\nJoin on your computer\, mobile app
+  or room device\nClick here to join the meeting<https://teams.microsoft.co
+ m/l/meetup-join/19%3ameeting_Y2QzYmU5ZDktYTA3ZS00ZWI5LWJlYzMtY2E3NjQ4MzI1Z
+ GMx%40thread.v2/0?context=%7b%22Tid%22%3a%222f3e9341-2664-4d30-8aee-52b5cf
+ 7c97a4%22%2c%22Oid%22%3a%224783b60e-20af-4bf9-b8d5-6476958ebb1a%22%7d>\nMe
+ eting ID: 475 485 975 415\nPasscode: pwHmxm\nDownload Teams<https://www.mi
+ crosoft.com/en-us/microsoft-teams/download-app> | Join on the web<https://
+ www.microsoft.com/microsoft-teams/join-a-meeting>\nLearn More<https://aka.
+ ms/JoinTeamsMeeting> | Meeting options<https://teams.microsoft.com/meeting
+ Options/?organizerId=4783b60e-20af-4bf9-b8d5-6476958ebb1a&tenantId=2f3e934
+ 1-2664-4d30-8aee-52b5cf7c97a4&threadId=19_meeting_Y2QzYmU5ZDktYTA3ZS00ZWI5
+ LWJlYzMtY2E3NjQ4MzI1ZGMx@thread.v2&messageId=0&language=en-US>\n__________
+ ______________________________________________________________________\n
+UID:040000008200E00074C5B7101A82E008000000003DC2ACED924DD901000000000000000
+ 0100000008FC1FA6FF5929642A315A497742DE87D
+SUMMARY;LANGUAGE=en-US:Interview-Fullstack
+DTSTART;TZID=India Standard Time:20230303T160000
+DTEND;TZID=India Standard Time:20230303T170000
+CLASS:PUBLIC
+PRIORITY:5
+DTSTAMP:20230303T054225Z
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+SEQUENCE:0
+LOCATION;LANGUAGE=en-US:Zone3-A
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-OWNERAPPTID:2121473853
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-ONLINEMEETINGINFORMATION:{"OnlineMeetingChannelId":null\,"Onlin
+ eMeetingProvider":3}
+X-MICROSOFT-SKYPETEAMSMEETINGURL:https://teams.microsoft.com/l/meetup-join/
+ 19%3ameeting_Y2QzYmU5ZDktYTA3ZS00ZWI5LWJlYzMtY2E3NjQ4MzI1ZGMx%40thread.v2/
+ 0?context=%7b%22Tid%22%3a%222f3e9341-2664-4d30-8aee-52b5cf7c97a4%22%2c%22O
+ id%22%3a%224783b60e-20af-4bf9-b8d5-6476958ebb1a%22%7d
+X-MICROSOFT-SCHEDULINGSERVICEUPDATEURL:https://api.scheduler.teams.microsof
+ t.com/teams/2f3e9341-2664-4d30-8aee-52b5cf7c97a4/4783b60e-20af-4bf9-b8d5-6
+ 476958ebb1a/19_meeting_Y2QzYmU5ZDktYTA3ZS00ZWI5LWJlYzMtY2E3NjQ4MzI1ZGMx@th
+ read.v2/0
+X-MICROSOFT-SKYPETEAMSPROPERTIES:{"cid":"19:meeting_Y2QzYmU5ZDktYTA3ZS00ZWI
+ 5LWJlYzMtY2E3NjQ4MzI1ZGMx@thread.v2"\,"rid":0\,"mid":0\,"uid":null\,"priva
+ te":true\,"type":0}
+X-MICROSOFT-ONLINEMEETINGCONFLINK:conf:sip:tanya.upreti@e2eresearch.com\;gr
+ uu\;opaque=app:conf:focus:id:teams:2:0!19:meeting_Y2QzYmU5ZDktYTA3ZS00ZWI5
+ LWJlYzMtY2E3NjQ4MzI1ZGMx-thread.v2!4783b60e20af4bf9b8d56476958ebb1a!2f3e93
+ 4126644d308aee52b5cf7c97a4
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-LOCATIONDISPLAYNAME:Zone3-A
+X-MICROSOFT-LOCATIONSOURCE:None
+X-MICROSOFT-LOCATIONS:[{"DisplayName":"Zone3-A"\,"LocationAnnotation":""\,"
+ LocationUri":""\,"LocationStreet":""\,"LocationCity":""\,"LocationState":"
+ "\,"LocationCountry":""\,"LocationPostalCode":""\,"LocationFullAddress":""
+ }]
+BEGIN:VALARM
+DESCRIPTION:REMINDER
+TRIGGER;RELATED=START:-PT15M
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR

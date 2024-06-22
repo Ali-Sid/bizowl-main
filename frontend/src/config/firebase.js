@@ -1,0 +1,30 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth"
+import { getFirestore } from 'firebase/firestore';
+
+import { primaryFirebaseConfig } from "./firebaseconfig";
+import { adminFirebaseConfig } from "./firebaseconfig";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+
+// Initialize primary Firebase
+const primaryApp = initializeApp(primaryFirebaseConfig, "primary");
+// const analytics = getAnalytics(app);
+const primaryAuth = getAuth(primaryApp);
+const primaryDB = getFirestore(primaryApp);
+
+
+// Initialize secondary Firebase
+const adminApp = initializeApp(adminFirebaseConfig, "admin");
+// const analytics = getAnalytics(app);
+const adminAuth = getAuth(adminApp);
+const adminDB = getFirestore(adminApp);
+
+
+
+export { primaryAuth, adminAuth, primaryDB, adminDB }

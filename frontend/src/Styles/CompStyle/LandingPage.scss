@@ -1,0 +1,92 @@
+@import './../Fixed/staticStyle.scss';
+
+.landingMainHead {
+    display: flex;
+    justify-content: space-between;
+    // padding: 10px;
+    font-size: small;
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+    overflow: hidden;
+    // background: $blueColorBackground;
+    background-image: $backgroundimage;
+
+    @media(max-width:975px) {
+        flex-direction: column;
+    }
+}
+
+.LandingPagePopup .modal-body {
+    padding: 0px;
+    border-radius: 10px;
+}
+
+.LandingPagePopup .modal-content {
+    border-radius: 10px;
+    background-image: $backgroundimage;
+}
+
+.landingPageImageDiv {
+    width: 60%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media(max-width:975px) {
+        width: 100%;
+    }
+}
+
+.landingPageImage {
+    width: 80%;
+}
+
+.landingPageFormDiv {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.landingTitle {
+    font-size: medium;
+    counter-reset: white;
+    padding: 10px;
+    border-bottom: solid 1px lightgrey;
+    font-weight: bold;
+
+    @media(max-width:975px) {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+.landingButtonClose {
+    background: $lightBlueColorBackground;
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 100px;
+    color: #1c6ed0;
+    transition: 0.3s;
+    position: absolute;
+    right: 20px;
+    border: solid 2px $darkBlueColorBackground;
+
+    &:hover {
+        border: solid 2px $lightBlueColorBackground;
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    @media(max-width:675px) {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 25px;
+        padding: 5px;
+    }
+}

@@ -1,0 +1,79 @@
+@import "./../Fixed/staticStyle.scss";
+
+.checkButton {
+  width: 100%;
+  height: 50px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: $fontFamily;
+}
+
+.buttonDivCol {
+  display: flex;
+  justify-content: center;
+}
+
+.connectBizowlButton {
+  padding-block: 20px;
+  padding-inline: 10%;
+  background-color: white;
+  border-radius: 50px;
+  color: #414141;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  -webkit-box-shadow: 3px 6px 16px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 3px 6px 16px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 6px 16px 1px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    -webkit-box-shadow: 3px 6px 16px 1px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 3px 6px 16px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 6px 16px 1px rgba(0, 0, 0, 0.4);
+  }
+
+  @media (max-width: 975px) {
+    font-size: 15x;
+    margin-bottom: 5%;
+    padding-block: 10px;
+  }
+}
+
+.inputStyleCommon {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: small;
+  border: solid 1px lightgrey;
+  margin-top: 5px;
+}
+
+.inputStyleCommon::placeholder {
+  color: rgba(0, 0, 0, 0.485);
+}
+
+.borderRadius100 {
+  border-radius: 100px;
+}
+
+.textBackgroundGrey {
+  background-color: #0000000a;
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+.smallCheckbox {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  margin-right: 10px;
+}

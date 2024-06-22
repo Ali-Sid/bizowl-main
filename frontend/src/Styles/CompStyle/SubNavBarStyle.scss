@@ -1,0 +1,19 @@
+
+@import './../Fixed/staticStyle.scss';
+
+.subHeaderMainDiv{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: $darkBlueColorBackground;
+    font-size: small;
+    color: white;
+    font-weight: 500;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+.navLinks{
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+}
