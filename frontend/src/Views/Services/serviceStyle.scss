@@ -1,0 +1,55 @@
+// @media (max-width: 1250px) {
+//     p {
+//         font-size: small;
+//     }
+//     h6 {
+//         font-size: 12px;
+//     }
+// }
+
+.filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.filter-button {
+  border-radius: 5px;
+  padding: 8px 16px;
+  background-color: #408aeb;
+  cursor: pointer;
+  font-weight: 500;
+  color: white;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.filter-button:hover {
+  background-color: #092b58;
+}
+
+.filter-button:focus {
+  outline: 1px dashed;
+}
+
+.filter-options {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 8px;
+  z-index: 1;
+}
+
+.filter-option {
+  border: none;
+  background-color: transparent;
+  color: #333;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.filter-option:hover {
+  background-color: #f0f0f0;
+}
