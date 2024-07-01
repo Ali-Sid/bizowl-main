@@ -93,10 +93,10 @@ const Footer = () => {
             />
           </div>
           <div className="footerSec2Text1">
-            You can get any service from idea validation to business
-            establishment and scale it to the next level. Get both Fundamental
-            and Digital services. Compare and choose the best one as per your
-            need.
+            Bizowl is an online platform designed exclusively for business
+            owners and startups. Bizowl offers essential services, tools,
+            resources, and expert guidance to start and grow a business, all
+            under one roof.
           </div>
         </Col>
         <Col md={1}></Col>

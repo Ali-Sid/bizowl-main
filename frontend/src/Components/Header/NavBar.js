@@ -884,16 +884,32 @@ const NavBar = () => {
 
         <div className="flex phonePositionRight webPaddingRight6p fontWeight500 hidePhoneView">
           <NavLink className="nav-link navLink" to="/">
-            Home
+            Services
           </NavLink>
-          <NavLink className="nav-link navLink" to="/company-name-generator">
+          {/* <NavLink className="nav-link navLink" to="/company-name-generator">
             Business Name Generator
-          </NavLink>
-          <NavLink className="nav-link navLink" to="/aboutUs">
-            About us
-          </NavLink>
+          </NavLink> */}
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <div class="nav-link navLink">Tools</div>
+              <ul class="dropdown-menu">
+                <li>
+                  <NavLink
+                    className="nav-link navLink"
+                    to="/company-name-generator"
+                  >
+                    Business Name Generator
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+          </ul>
 
-          <ul className="navbar-nav text-start">
+          {/* <NavLink className="nav-link navLink" to="/aboutUs">
+            About us
+          </NavLink> */}
+
+          {/* <ul className="navbar-nav text-start">
             <li className="nav-item dropdown">
               <div
                 className={
@@ -999,28 +1015,28 @@ const NavBar = () => {
                 </div>
               </ul>
             </li>
-          </ul>
+          </ul> */}
 
           <NavLink className="nav-link navLink" to="/blogs">
-            Blogs
+            Resources
           </NavLink>
-          <NavLink className="nav-link navLink" to="/contactUs">
+          {/* <NavLink className="nav-link navLink" to="/contactUs">
             Contact us
-          </NavLink>
+          </NavLink> */}
           <button
             onClick={() => dispatch(setIsVisible(true))}
             className="btn btn-outline-primary navButtonStyle freeConsultationButton"
             type="submit"
           >
-            FREE CONSULTATION
+            Guidance
           </button>
           <a href="https://bizowl-auth.web.app">
-          <button
-            style={{marginLeft: "20px"}}
-            className="btn btn-outline-primary navButtonStyle freeConsultationButton"
-          >
-            Login
-          </button>
+            <button
+              style={{ marginLeft: "20px" }}
+              className="btn btn-outline-primary navButtonStyle freeConsultationButton"
+            >
+              Login
+            </button>
           </a>
         </div>
       </nav>
@@ -1051,13 +1067,28 @@ const NavBar = () => {
 
           <div className="offcanvas-body mobileViewHeader">
             <NavLink className="nav-link navLink" to="/">
-              Home
+              Services
             </NavLink>
-            <NavLink className="nav-link navLink" to="/aboutUs">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <div class="nav-link navLink">Tools</div>
+                <ul class="dropdown-menu">
+                  <li>
+                    <NavLink
+                      className="nav-link navLink"
+                      to="/company-name-generator"
+                    >
+                      Business Name Generator
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {/* <NavLink className="nav-link navLink" to="/aboutUs">
               About us
-            </NavLink>
+            </NavLink> */}
 
-            <ul className="navbar-nav text-start">
+            {/* <ul className="navbar-nav text-start">
               <li className="nav-item dropdown">
                 <div
                   className={
@@ -1163,27 +1194,25 @@ const NavBar = () => {
                   </div>
                 </ul>
               </li>
-            </ul>
+            </ul> */}
 
             <NavLink className="nav-link navLink" to="/blogs">
-              Blogs
+              Resources
             </NavLink>
-            <NavLink className="nav-link navLink" to="/contactUs">
+            {/* <NavLink className="nav-link navLink" to="/contactUs">
               Contact us
-            </NavLink>
+            </NavLink> */}
             <button
               onClick={() => dispatch(setIsVisible(true))}
               className="btn btn-outline-primary navButtonStyle marginTop10 freeConsultationButton"
               type="submit"
             >
-              FREE CONSULTATION
+              Guidance
             </button>
-            <a style={{marginTop: "20px"}} href="https://bizowl-auth.web.app">
-            <button
-              className="btn btn-outline-primary navButtonStyle marginTop10 freeConsultationButton"
-            >
-              Login
-            </button>
+            <a style={{ marginTop: "20px" }} href="https://bizowl-auth.web.app">
+              <button className="btn btn-outline-primary navButtonStyle marginTop10 freeConsultationButton">
+                Login
+              </button>
             </a>
           </div>
         </div>
