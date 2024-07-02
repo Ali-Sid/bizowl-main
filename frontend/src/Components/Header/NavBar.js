@@ -1023,13 +1023,11 @@ const NavBar = () => {
           {/* <NavLink className="nav-link navLink" to="/contactUs">
             Contact us
           </NavLink> */}
-          <button
+          <NavLink
             onClick={() => dispatch(setIsVisible(true))}
-            className="btn btn-outline-primary navButtonStyle freeConsultationButton"
-            type="submit"
           >
             Guidance
-          </button>
+          </NavLink>
           <a href="https://bizowl-auth.web.app">
             <button
               style={{ marginLeft: "20px" }}
@@ -1202,14 +1200,10 @@ const NavBar = () => {
             {/* <NavLink className="nav-link navLink" to="/contactUs">
               Contact us
             </NavLink> */}
-            <button
-              onClick={() => dispatch(setIsVisible(true))}
-              className="btn btn-outline-primary navButtonStyle marginTop10 freeConsultationButton"
-              type="submit"
-            >
+            <NavLink onClick={() => dispatch(setIsVisible(true))} className="nav-link navLink">
               Guidance
-            </button>
-            <a style={{ marginTop: "20px" }} href="https://bizowl-auth.web.app">
+            </NavLink>
+            <a href="https://bizowl-auth.web.app">
               <button className="btn btn-outline-primary navButtonStyle marginTop10 freeConsultationButton">
                 Login
               </button>
