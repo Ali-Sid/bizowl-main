@@ -1028,7 +1028,7 @@ const NavBar = () => {
           >
             Guidance
           </NavLink>
-          <a href="https://bizowl-auth.web.app">
+          <a href="https://bizowl-auth.web.app/login">
             <button
               style={{ marginLeft: "20px" }}
               className="btn btn-outline-primary navButtonStyle freeConsultationButton"

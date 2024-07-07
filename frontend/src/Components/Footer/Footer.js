@@ -131,6 +131,11 @@ const Footer = () => {
               Privacy Policy
             </NavLink>
           </div>
+          <div className="footerSec2Text1 pointer">
+            <NavLink className="navLinks textCapitalize" to="https://bizowl-partner.web.app/login">
+              Partner
+            </NavLink>
+          </div>
         </Col>
         <Col md={3}>
           <div className="footerSec2Text1 pointer">Let's Chat!</div>
