@@ -132,6 +132,11 @@ const Footer = () => {
             </NavLink>
           </div>
           <div className="footerSec2Text1 pointer">
+            <NavLink className="navLinks textCapitalize" to="/refund-and-cancellation-policy">
+              Refund and Cancellation Policy
+            </NavLink>
+          </div>
+          <div className="footerSec2Text1 pointer">
             <NavLink className="navLinks textCapitalize" to="https://bizowl-partner.web.app/login">
               Partner
             </NavLink>

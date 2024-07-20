@@ -16,6 +16,7 @@ import TermsAndCondition from '../../Views/Auth/TermsAndCondition';
 import NotFound from '../../Views/Auth/NotFound';
 import NameGen from '../../Views/Auth/NameGen';
 import Service from '../../Views/Services/Service'
+import RefundPolicy from '../../Views/Auth/RefundPolicy';
 
 
 
@@ -39,6 +40,7 @@ const AuthNavigation = () => {
                 <Route exact path="/blogs/:blogId/:blogId" name="Specific Blogs" element={<ProtectedRoutes Component={SpecificBlogs} accessRights={"guest"} />} />
                 <Route exact path="/projectCreation" name="Project Creation" element={<ProtectedRoutes Component={ProjectCreation} accessRights={"guest"} />} />
                 <Route exact path="/privacyPolicy" name="Privacy Policy" element={<ProtectedRoutes Component={PrivacyPolicy} accessRights={"guest"} />} />
+                <Route exact path="/refund-and-cancellation-policy" name="Refund Policy" element={<ProtectedRoutes Component={RefundPolicy} accessRights={"guest"} />} />
                 <Route exact path="/termsAndCondition" name="Terms & Condition" element={<ProtectedRoutes Component={TermsAndCondition} accessRights={"guest"} />} />
                 <Route exact path="/service" name="Service" element={<ProtectedRoutes Component={Service} accessRights={"guest"} />} />
                 <Route path="*" element={<ProtectedRoutes Component={NotFound} accessRights={"guest"} />} />
