@@ -65,7 +65,7 @@ const RefundPolicy = () => {
 
         <div className="padding50 fontSize13 justifyText">
           At <span className="bold"> Bizzowl</span>, we prioritize customer
-          satisfaction and strive to deliver high-quality <span style={{textDecoration: "underline", color: "blue"}}><a href="/">digital services</a></span>,
+          satisfaction and strive to deliver high-quality <span className="touchable colorPrimary"><a href="/">digital services</a></span>,
           including Digital Marketing, Web Development, Design, Advertising,
           Marketing, and Business Fundamental Services. <br /> Our refund policy
           outlines the conditions under which refunds are granted to ensure
@@ -107,10 +107,12 @@ const RefundPolicy = () => {
           <span className="bold">Contact Us: </span>
           Email us at{" "}
           <span className="touchable colorPrimary">
+            <a href="mailto:info@bizzowl.com">
             info@bizzowl.com
+            </a>
           </span> or{" "}
-          <span className="touchable colorPrimary">contact@bizzowl.com</span> or
-          call us at +91935465143.
+          <span className="touchable colorPrimary"><a href="mailto:contact@bizzowl.com">contact@bizzowl.com</a></span> or
+          call us at <span className="touchable colorPrimary"><a href="tel:+91935465143">+91935465143</a></span>.
           <br />
           <br />
           <span className="bold">Provide Details: </span> Include the email and
@@ -134,10 +136,10 @@ const RefundPolicy = () => {
           <span className="title4"> Contact Information</span>
           <br /> For any inquiries or refund requests, please contact us:
           <br />
-          <span className="bold">Email: </span> info@bizzowl.com or
-          contact@bizzowl.com
+          <span className="bold">Email: </span> <span className="touchable colorPrimary"><a href="mailto:info@bizzowl.com">info@bizzowl.com</a></span> or
+          <span className="touchable colorPrimary"><a href="mailto:contact@bizzowl.com"> contact@bizzowl.com</a></span>
           <br />
-          <span className="bold"> Phone:</span> +91935465143
+          <span className="bold"> Phone:</span> <span className="touchable colorPrimary"><a href="tel:+91935465143">+91935465143</a></span>
           <br />
           <br />
           <span className="title4"> Customer Support Hours: </span> <br />
