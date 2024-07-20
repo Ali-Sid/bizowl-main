@@ -64,8 +64,8 @@ const RefundPolicy = () => {
         )}
 
         <div className="padding50 fontSize13 justifyText">
-          At <span className="bold"> Bizzowl.com</span>, we prioritize customer
-          satisfaction and strive to deliver high-quality digital services,
+          At <span className="bold"> Bizzowl</span>, we prioritize customer
+          satisfaction and strive to deliver high-quality <span style={{textDecoration: "underline", color: "blue"}}><a href="/">digital services</a></span>,
           including Digital Marketing, Web Development, Design, Advertising,
           Marketing, and Business Fundamental Services. <br /> Our refund policy
           outlines the conditions under which refunds are granted to ensure
