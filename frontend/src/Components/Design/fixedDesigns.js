@@ -787,7 +787,7 @@ export const SubHeader = (
             {primaryName}
           </NavLink>
         </div>
-        <div>
+        <div className="subHeaderRow">
           <span>
             <NavLink className="navLinks" to={secondaryPath}>
               {secondaryName}

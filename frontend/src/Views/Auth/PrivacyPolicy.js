@@ -26,9 +26,9 @@ const PrivacyPolicy = () => {
 
         {SubHeader('Privacy Policy', 'privacyPolicy', 'home', 'home')}
 
-        <div className='padding50 fontSize13 justifyText textCapitalize'>
+        <div className='padding50 fontSize13 justifyText'>
 
-          At <span className='bold'> Bizzowl.com</span>, we are committed to protecting the privacy and personal information of our users. This privacy policy outlines the types of personal information we may collect, how we use and protect that information, and your rights as a user of our services.
+          At <span className='bold'> Bizowl</span>, we are committed to protecting the privacy and personal information of our users. This privacy policy outlines the types of personal information we may collect, how we use and protect that information, and your rights as a user of our services.
           <br /> <br />
 
           <div className='title4'> Information We Collect </div>

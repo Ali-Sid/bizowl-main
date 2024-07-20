@@ -58,13 +58,13 @@ const RefundPolicy = () => {
       <div className="homepageContainer">
         {SubHeader(
           "Refund and Cancellation Policy",
-          "refundandCancellationPolicy",
+          "refund-and-cancellation-policy",
           "home",
-          "home"
+          ""
         )}
 
         <div className="padding50 fontSize13 justifyText">
-          At <span className="bold"> Bizzowl</span>, we prioritize customer
+          At <span className="bold"> Bizowl</span>, we prioritize customer
           satisfaction and strive to deliver high-quality <span className="touchable colorPrimary"><a href="/">digital services</a></span>,
           including Digital Marketing, Web Development, Design, Advertising,
           Marketing, and Business Fundamental Services. <br /> Our refund policy

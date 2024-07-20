@@ -3,6 +3,7 @@
 
 .subHeaderMainDiv{
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding: 10px;
     background: $darkBlueColorBackground;
@@ -12,6 +13,13 @@
     padding-left: 7%;
     padding-right: 7%;
 }
+
+.subHeaderRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .navLinks{
     text-decoration: none;
     color: white;
