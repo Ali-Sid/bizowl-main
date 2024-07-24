@@ -116,6 +116,11 @@ const Footer = () => {
               Blogs
             </NavLink>
           </div>
+          <div className="footerSec2Text1 pointer">
+            <NavLink className="navLinks textCapitalize" to="/contactUs">
+              Contact Us
+            </NavLink>
+          </div>
         </Col>
         <Col md={3}>
           <div className="footerSec2Text1 pointer">

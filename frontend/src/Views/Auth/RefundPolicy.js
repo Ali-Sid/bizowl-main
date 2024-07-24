@@ -121,6 +121,7 @@ const RefundPolicy = () => {
           <span className="bold">Processing: </span> Refunds will be processed
           to the original payment source, with payment gateway charges deducted.
           <br />
+          <span className="bold">Note: </span> We will credit the refund amount within 5-7 working days.
           <br />
           <br />
           <div className="title4">Exceptions and Special Cases</div>

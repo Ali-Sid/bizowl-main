@@ -665,6 +665,31 @@ export const AskBigCard = () => {
                 </div>
               </div>
             </Col>
+            <Col md={10}>
+              <div className="contactDetailsItem marginTop20">
+                <div className="contactDetailsItemHead">
+                  <div className="contactDetailsHeadLogo">
+                    <img
+                      className="contactDetailsLogo"
+                      src="Images/fixedDesigns/userImage.png"
+                      alt=""
+                      style={{}}
+                    />
+                  </div>
+                  <div className="contactDetailsHeadTitle">
+                    Address
+                    <div
+                      // onClick={() => {
+                      //   WindowOpenLink("mailto:sales@bizzowl.com", "_self");
+                      // }}
+                      className="contactDetailsItemBody touchable"
+                    >
+                      WZ-49/C, Radha Krishna Mandir, Dwarka Sector -1, New Delhi, Delhi, 110045
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
           </Row>
         </div>
       </div>
