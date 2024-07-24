@@ -210,7 +210,7 @@ const Footer = () => {
         </Col>
         <Col md={12}>
           <div className="colorWhite marginTop30 padding10">
-            &copy; Copyright White Sense Pvt. Ltd. 2023
+            &copy; Copyright White Sense Pvt. Ltd. {new Date().getFullYear()}
           </div>
         </Col>
       </Row>
