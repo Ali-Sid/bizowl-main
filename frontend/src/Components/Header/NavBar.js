@@ -1020,9 +1020,9 @@ const NavBar = () => {
           <NavLink className="nav-link navLink" to="/blogs">
             Resources
           </NavLink>
-          <NavLink className="nav-link navLink" to="/contactUs">
+          {/* <NavLink className="nav-link navLink" to="/contactUs">
             Contact us
-          </NavLink>
+          </NavLink> */}
           <NavLink
             onClick={() => dispatch(setIsVisible(true))}
           >
