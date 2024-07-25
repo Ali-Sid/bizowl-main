@@ -8,7 +8,6 @@ import "../../Styles/AllRouteStyle.scss";
 import HomePage from '../../Views/Auth/HomePage';
 import AboutUs from '../../Views/Auth/AboutUs';
 import Blogs from '../../Views/Auth/Blogs';
-import SpecificBlogs from '../../Views/Auth/SpecificBlogs';
 import ProjectCreation from '../../Views/Auth/ProjectCreation';
 import ContactUs from '../../Views/Auth/ContactUs';
 import PrivacyPolicy from '../../Views/Auth/PrivacyPolicy';
@@ -17,6 +16,8 @@ import NotFound from '../../Views/Auth/NotFound';
 import NameGen from '../../Views/Auth/NameGen';
 import Service from '../../Views/Services/Service'
 import RefundPolicy from '../../Views/Auth/RefundPolicy';
+import SpecificBlogs from '../../Views/Auth/blogs/SpecificBlogs';
+import SpecificBlog2 from '../../Views/Auth/blogs/SpecificBlog2';
 
 
 
@@ -37,6 +38,7 @@ const AuthNavigation = () => {
                 <Route exact path="/blogs" name="Blogs" element={<ProtectedRoutes Component={Blogs} accessRights={"guest"} />} />
                 <Route exact path="/contactUs" name="Contact Us" element={<ProtectedRoutes Component={ContactUs} accessRights={"guest"} />} />
                 <Route exact path="/:blogId/:blogId" name="Specific Blogs" element={<ProtectedRoutes Component={SpecificBlogs} accessRights={"guest"} />} />
+                <Route exact path="/blogs/:blogId/:blogId" name="Specific Blogs" element={<ProtectedRoutes Component={SpecificBlog2} accessRights={"guest"} />} />
                 <Route exact path="/blogs/:blogId/:blogId" name="Specific Blogs" element={<ProtectedRoutes Component={SpecificBlogs} accessRights={"guest"} />} />
                 <Route exact path="/projectCreation" name="Project Creation" element={<ProtectedRoutes Component={ProjectCreation} accessRights={"guest"} />} />
                 <Route exact path="/privacyPolicy" name="Privacy Policy" element={<ProtectedRoutes Component={PrivacyPolicy} accessRights={"guest"} />} />

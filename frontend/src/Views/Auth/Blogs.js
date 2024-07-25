@@ -48,6 +48,18 @@ const Blogs = () => {
         "In today's fast-paced business world, small business owners and startup entrepreneurs face numerous challenges...",
       date: "12-Oct-2023",
     },
+    {
+      id: 2,
+      icon: "https://res.cloudinary.com/dr1pmtefx/image/upload/v1721878655/bizowl-blog-2_di2op8.png",
+      jobTitle: "Public Relations",
+      tag: "pr",
+      urlTitle: "21-benefits-of-press-release-distribution",
+      title:
+        "21 Benefits of Press Release Distribution: Elevate Your Brand's Visibility and Credibility",
+      description:
+        "Discover 21 powerful benefits of press release distribution that can elevate your brand's visibility and credibility. Learn how press releases can boost SEO, build trust, and drive traffic.",
+      date: "24-Jul-2024",
+    },
     // Add more blog posts here
   ];
 
