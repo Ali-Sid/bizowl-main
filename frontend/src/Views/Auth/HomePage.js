@@ -1935,7 +1935,7 @@ const HomePage = () => {
               <Row md={12}>
                 {blogPosts.map((post) => (
                   <Col key={post.id} md={6} className="marginTop20">
-                    <Link to={`/home/${post.tag}/${post.urlTitle}`}>
+                    <Link to={`/blogs/${post.tag}/${post.urlTitle}`}>
                       {" "}
                       {/* Use Link component for each blog post */}
                       <BlogsBigCard2
