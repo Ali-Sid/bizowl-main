@@ -69,7 +69,11 @@ const HomePage = () => {
   const serviceHeadList = [
     {
       value: "Business Fundamental Services",
-      label: "Business Fundamental Services",
+      label: " Fundamental Services",
+    },
+    {
+      value: "Press Release",
+      label: "Press Release",
     },
     { value: "Web Development", label: "Web Development" },
     { value: "Digital Marketing", label: "Digital Marketing" },
@@ -599,16 +603,16 @@ const HomePage = () => {
     //****//
   ];
 
-    // const ModalComponent = () => {
-    //   const [isModalOpen, setIsModalOpen] = useState(false);
+  // const ModalComponent = () => {
+  //   const [isModalOpen, setIsModalOpen] = useState(false);
 
-    //   const openModal = () => {
-    //     setIsModalOpen(true);
-    //   };
+  //   const openModal = () => {
+  //     setIsModalOpen(true);
+  //   };
 
-    //   const closeModal = () => {
-    //     setIsModalOpen(false);
-    //   };
+  //   const closeModal = () => {
+  //     setIsModalOpen(false);
+  //   };
 
   //     const handleModalAction = () => {
   //       // Add your custom action logic here
@@ -1020,7 +1024,11 @@ const HomePage = () => {
           </Row>
         </div>
 
-        <div className="ourServicesSec" id="ourServicesSection">
+        <div
+          className="ourServicesSec"
+          style={{ overflowX: "unset", overflowY: "unset" }}
+          id="ourServicesSection"
+        >
           {OurMoreServicesDesign(
             loginWindow,
             serviceHeadList,
@@ -1822,7 +1830,11 @@ const HomePage = () => {
 
         <div className="faqSec">
           <div className="faqLeft">
-            <img src="Images/homepage/FAQ1.png" alt="faq" className="faqImage" />
+            <img
+              src="Images/homepage/FAQ1.png"
+              alt="faq"
+              className="faqImage"
+            />
           </div>
           <div className="faqRight">
             <div className="faqTitleContainer">

@@ -161,8 +161,8 @@
 }
 
 .serviceTypeBody {
-  max-height: 450px;
-  min-height: 200px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 10px;
+  height: 300px;
 }

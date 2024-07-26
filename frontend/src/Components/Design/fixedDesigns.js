@@ -233,7 +233,7 @@ export const OurMoreServicesDesign = (
 
   return (
     <Modal
-      className="transformLow9"
+      className="transformLow9 overflow-hidden"
       size="lg"
       show={loginWindow}
       onHide={() => serviceWindowFunction(false)}
@@ -247,24 +247,20 @@ export const OurMoreServicesDesign = (
               Our Services
             </span>
           </div>
-          <div>
-            <BsSearch className="searchIcon" />
-            <input
-              type={"text"}
-              value={serviceSearchValue}
-              onChange={(e) => {
-                setServiceSearchValue(e.target.value);
-              }}
-              style={{ paddingInline: 30 }}
-              placeholder="Search For Service"
-              className="inputStyleCommon borderRadius100 width300px"
-            />
-            <FaTimes
-              onClick={() => {
-                setServiceSearchValue("");
-              }}
-              className="clearServiceIcon"
-            />
+          <div className="flex items-center">
+            <div>
+              <BsSearch className="searchIcon" />
+              <input
+                type={"text"}
+                value={serviceSearchValue}
+                onChange={(e) => {
+                  setServiceSearchValue(e.target.value);
+                }}
+                style={{ paddingInline: 30 }}
+                placeholder="Search For Service"
+                className="inputStyleCommon borderRadius100 width300px"
+              />
+            </div>
             <FaTimes
               className="closeIcon"
               onClick={() => serviceWindowFunction(false)}
@@ -273,9 +269,9 @@ export const OurMoreServicesDesign = (
         </div>
       </Modal.Header>
 
-      <Modal.Body>
-        <div className="serviceStyle">
-          <div className="serviceTypeHead flex">
+      <Modal.Body className="overflow-hidden">
+        <div className="serviceStyle overflow-hidden">
+          <div className="serviceTypeHead flex  overflow-auto">
             {serviceHeadList.map((res, index) => {
               return (
                 <div
@@ -296,9 +292,9 @@ export const OurMoreServicesDesign = (
           </div>
         </div>
 
-        <div className="serviceBodySection">
-          <div className="serviceTypeTitle marginTop20">
-            <div className="BigTitleText fontSize20">
+        <div className="serviceBodySection overflow-hidden">
+          <div className="serviceTypeTitle marginTop20 overflow-hidden">
+            <div className="BigTitleText fontSize20 overflow-hidden">
               {" "}
               <span className="BigTitleHighlightedText fontSize25">
                 {" "}
@@ -584,8 +580,8 @@ export const AskBigCard = () => {
       <div className="askBigCardRight">
         <div className="askBigCardTitle">Ask us anything</div>
         <div className="askBigCardDescription">
-          Don&apos;t be hesitate to ask your questions with us we&apos;re happy to provide
-          you the solution
+          Don&apos;t be hesitate to ask your questions with us we&apos;re happy
+          to provide you the solution
         </div>
         <div className="">
           <Row>
@@ -684,7 +680,8 @@ export const AskBigCard = () => {
                       // }}
                       className="contactDetailsItemBody touchable"
                     >
-                      WZ-49/C, Radha Krishna Mandir, Dwarka Sector -1, New Delhi, Delhi, 110045
+                      WZ-49/C, Radha Krishna Mandir, Dwarka Sector -1, New
+                      Delhi, Delhi, 110045
                     </div>
                   </div>
                 </div>
@@ -953,7 +950,11 @@ export const ContactUsDesign = () => {
         </div>
       </div>
       <div>
-        <img src="./Images/homepage/contacts.png" className="contactImage" alt="contact" />
+        <img
+          src="./Images/homepage/contacts.png"
+          className="contactImage"
+          alt="contact"
+        />
       </div>
     </div>
   );

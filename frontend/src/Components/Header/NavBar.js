@@ -25,6 +25,7 @@ const NavBar = () => {
       name: "Business Fundamental Services",
       image: "Images/services/Other/StartupConsulting.png",
     },
+
     {
       name: "WEBSITE DEVELOPMENT",
       image: "Images/services/Graphic/WebsiteDesign.png",
@@ -1023,9 +1024,7 @@ const NavBar = () => {
           {/* <NavLink className="nav-link navLink" to="/contactUs">
             Contact us
           </NavLink> */}
-          <NavLink
-            onClick={() => dispatch(setIsVisible(true))}
-          >
+          <NavLink onClick={() => dispatch(setIsVisible(true))}>
             Guidance
           </NavLink>
           <a href="https://bizowl-auth.web.app/login">
@@ -1200,7 +1199,10 @@ const NavBar = () => {
             {/* <NavLink className="nav-link navLink" to="/contactUs">
               Contact us
             </NavLink> */}
-            <NavLink onClick={() => dispatch(setIsVisible(true))} className="nav-link navLink">
+            <NavLink
+              onClick={() => dispatch(setIsVisible(true))}
+              className="nav-link navLink"
+            >
               Guidance
             </NavLink>
             <a href="https://bizowl-auth.web.app">
