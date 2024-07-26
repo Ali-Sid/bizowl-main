@@ -45,7 +45,7 @@ import NavBar from "../../../Components/Header/NavBar";
 import Footer from "../../../Components/Footer/Footer";
 import { Link } from "@mui/material";
 
-const SpecificBlogs = () => {
+const SpecificBlog2 = () => {
   return (
     <>
       <NavBar />
@@ -441,4 +441,4 @@ const SpecificBlogs = () => {
     </>
   );
 };
-export default SpecificBlogs;
+export default SpecificBlog2;

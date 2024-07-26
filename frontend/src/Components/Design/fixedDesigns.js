@@ -707,7 +707,7 @@ export const BlogsBigCard = ({
 }) => {
   return (
     <div
-      className="blogsBigCard elevation overflowHidden"
+      className="blogsBigCard elevation overflowXHidden"
       onClick={() => {
         WindowOpenLink("/specificBlogs", "_blank");
       }}
@@ -740,7 +740,7 @@ export const BlogsBigCard2 = ({
 }) => {
   return (
     <div
-      className="blogsBigCard2 elevation overflowHidden"
+      className="blogsBigCard2 elevation overflowXHidden"
       // onClick={() => {
       //   WindowOpenLink("/specificBlogs", "_blank");
       // }}

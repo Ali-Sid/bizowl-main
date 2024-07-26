@@ -84,7 +84,7 @@ const Blogs = () => {
                     <Link to={`/blogs/${post.tag}/${post.urlTitle}`}>
                       {" "}
                       {/* Use Link component for each blog post */}
-                      <BlogsBigCard2
+                      <BlogsBigCard2  
                         icon={post.icon}
                         jobTitle={post.jobTitle}
                         title={post.title}
