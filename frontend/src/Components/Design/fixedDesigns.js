@@ -247,7 +247,7 @@ export const OurMoreServicesDesign = (
               Our Services
             </span>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center abc">
             <div>
               <BsSearch className="searchIcon" />
               <input
@@ -258,7 +258,7 @@ export const OurMoreServicesDesign = (
                 }}
                 style={{ paddingInline: 30 }}
                 placeholder="Search For Service"
-                className="inputStyleCommon borderRadius100 width300px"
+                className="inputStyleCommon borderRadius100"
               />
             </div>
             <FaTimes

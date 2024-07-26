@@ -512,11 +512,6 @@ const HomePage = () => {
       image: "Images/services/Marketing/PaidMedia.png",
       type: "Marketing",
     },
-    {
-      name: "PR",
-      image: "Images/services/Marketing/PR.png",
-      type: "Marketing",
-    },
 
     //************************************ Marketing Services ************************************/
 

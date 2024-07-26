@@ -43,9 +43,9 @@
   }
 
   @media(max-width:675px) {
-    position: absolute;
-    margin-top: -8%;
-    margin-left: -2%;
+    // position: absolute;
+    // margin-top: -8%;
+    // margin-left: -2%;
     font-size: 25px;
     padding: 5px;
   }
@@ -56,7 +56,7 @@
 }
 
 .serviceTypeHead {
-  padding-bottom: 20px;
+  padding-bottom: 0px;
 }
 
 .serviceTypeHead::-webkit-scrollbar {
@@ -165,4 +165,8 @@
   overflow-x: hidden;
   padding: 10px;
   height: 300px;
+
+  @media(max-width:740px){
+    height: 200px;
+  }
 }

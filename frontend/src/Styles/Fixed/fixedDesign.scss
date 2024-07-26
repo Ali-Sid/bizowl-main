@@ -42,7 +42,7 @@
 }
 
 .inputStyleCommon {
-  width: 100%;
+  width: 300px;
   padding: 5px;
   border-radius: 5px;
   padding-left: 10px;
@@ -50,6 +50,15 @@
   font-size: small;
   border: solid 1px lightgrey;
   margin-top: 5px;
+  
+
+  @media (max-width:430px){
+    width: 200px;
+  }
+}
+
+.abc{
+  justify-content: space-between;
 }
 
 .inputStyleCommon::placeholder {
