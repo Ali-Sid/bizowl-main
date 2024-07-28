@@ -1017,7 +1017,7 @@ const NavBar = () => {
             </li>
           </ul> */}
 
-          <NavLink className="nav-link navLink" to="/blogs">
+          <NavLink className="nav-link navLink" to="/resources/blogs">
             Resources
           </NavLink>
           {/* <NavLink className="nav-link navLink" to="/contactUs">

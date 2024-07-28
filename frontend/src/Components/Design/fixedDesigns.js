@@ -763,6 +763,39 @@ export const BlogsBigCard2 = ({
   );
 };
 
+export const BlogsBigCard3 = ({
+  icon,
+  title,
+  description,
+  action,
+  date,
+  jobTitle,
+}) => {
+  return (
+    <div
+      className="blogsBigCard2 elevation overflowXHidden"
+      // onClick={() => {
+      //   WindowOpenLink("/specificBlogs", "_blank");
+      // }}
+    >
+      <div className="blogsBigCardLogo">
+        <img className="blogsBigCardImg" alt="" src={icon} />
+      </div>
+      <div className="blogsBigCardDescription">
+        <div className="flex">
+          <div className="blogsDate">{jobTitle}</div> &nbsp;&nbsp;
+          {date}
+        </div>
+        <div className="blogsBigCardTitle marginTop10">
+          {" "}
+          {ellipsisText(title, 2)}{" "}
+        </div>
+        <div className="marginTop10">{ellipsisText(description, 5)}</div>
+      </div>
+    </div>
+  );
+};
+
 export const BlogsSmallCard = ({
   icon,
   title,

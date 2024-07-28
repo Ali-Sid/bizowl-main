@@ -1,19 +1,15 @@
-import NotFound from "../NotFound";
-import SpecificBlog2 from "./SpecificBlog2";
+import { useParams } from 'react-router-dom';
 import SpecificBlogs from "./SpecificBlogs";
+import SpecificBlog2 from "./SpecificBlog2";
 
-const blogComponents = {
-  1: SpecificBlogs,
-  2: SpecificBlog2,
-  // Add more blog IDs and components as needed
-};
+const BlogToDisplay = () => {
+  const { type } = useParams();
 
-const BlogToDisplay = ({ blogId }) => {
-  const BlogComponent = blogComponents[blogId];
-  if (!BlogComponent) {
-    return <NotFound />;
+  if (type === 'pr') {
+    return <SpecificBlog2 />;
+  } else {
+    return <SpecificBlogs />;
   }
-  return <BlogComponent />;
 };
 
 export default BlogToDisplay;

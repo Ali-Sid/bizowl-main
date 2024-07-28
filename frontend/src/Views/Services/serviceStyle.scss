@@ -53,3 +53,72 @@
 .filter-option:hover {
   background-color: #f0f0f0;
 }
+
+.comparison-tray {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.close-icon {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #aaa;
+}
+
+.close-icon:hover {
+  color: red;
+}
+
+// .comparison-tray button {
+//   background-color: #407bff;
+//   color: #fff;
+//   padding: 1rem;
+//   border-radius: 5px;
+// }
+
+
+/* Mobile styles */
+
+@media only screen and (max-width: 768px) {
+  .comparison-tray {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comparison-tray ul {
+    display: flex;
+    flex-direction: row;
+    // flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .comparison-tray li {
+    width: 20%;
+    margin: 10px;
+    flex-basis: auto;
+    flex-grow: 1;
+  }
+
+  // .comparison-tray button {
+  //   width: 50%;
+  //   margin: 10px;
+  //   padding: 10px;
+  // }
+
+  // .comparison-tray button:first-child {
+  //   margin-right: 10px; /* add some space between the buttons */
+  // }
+}

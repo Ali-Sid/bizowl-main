@@ -23,16 +23,23 @@ import {
   Button,
   Card,
   CardContent,
+  Checkbox,
   Grid,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import "./serviceStyle.scss";
-import { Center, Link } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
+import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 const Service = () => {
   const [ratings, setRatings] = useState(5);
   const [services, setServices] = useState(6);
+  const [isChecked, setIsChecked] = useState({});
+  const [comparisonTrayVisible, setComparisonTrayVisible] = useState(false);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const navigate = useNavigate();
 
   const isMobile = useMediaQuery("(max-width:768px)");
 
@@ -185,18 +192,74 @@ const Service = () => {
     },
   ];
 
+  const handleCheckboxChange = (event, serviceId) => {
+    if (selectedServices.length >= 3 && event.target.checked) {
+      event.target.checked = false;
+      return;
+    }
+
+    setIsChecked((prevChecked) => ({
+      ...prevChecked,
+      [serviceId]: event.target.checked,
+    }));
+
+    if (event.target.checked) {
+      setComparisonTrayVisible(true);
+      handleAddToComparisonTray(serviceId);
+    } else {
+      setSelectedServices((prevServices) =>
+        prevServices.filter((id) => id !== serviceId)
+      );
+      if (selectedServices.length === 0) {
+        setComparisonTrayVisible(false);
+      }
+    }
+  };
+
+  const handleAddToComparisonTray = (service) => {
+    setSelectedServices((prevServices) => [...prevServices, service]);
+  };
+
+  // const handleCompare = () => {
+  //   const selectedService = selectedServices.filter((service) => service.selected);
+  //   navigate(`/service/compare?services=${selectedService.map((service) => service.id).join(',')}`);
+  // };
+
+  const handleCompare = () => {
+    const queryString = selectedServices.join(',');
+    navigate(`/service/compare?services=${queryString}`);
+  };
+
+  const handleCancel = () => {
+    setComparisonTrayVisible(false);
+    setSelectedServices([]);
+    setIsChecked({});
+  };
+
+  const handleRemoveFromComparisonTray = (serviceId) => {
+    setSelectedServices((prevServices) => {
+      const newServices = prevServices.filter((id) => id !== serviceId);
+      if (newServices.length === 0) {
+        setComparisonTrayVisible(false);
+        setSelectedServices([]);
+        setIsChecked({});
+      } else {
+        setIsChecked((prevChecked) => ({ ...prevChecked, [serviceId]: false }));
+      }
+      return newServices;
+    });
+  };
+
   return (
     <div className="card">
       <div className="card-body" style={{ backgroundColor: "#c3ddf938" }}>
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">
-            <Link href="/">
-              <img
-                src={BizowalLogo}
-                alt="BizowlLogo"
-                width={isMobile ? "120px" : "200px"}
-              />
-            </Link>
+            <img
+              src={BizowalLogo}
+              alt="BizowlLogo"
+              width={isMobile ? "120px" : "200px"}
+            />
           </div>
           <div className="d-flex align-items-center">
             <img
@@ -207,227 +270,785 @@ const Service = () => {
             <p>Need help?</p>
           </div>
         </div>
-      </div>
-      {!isMobile ? (
-        <div className="d-flex">
-          <div className="m-5" style={{ width: "20rem" }}>
-            {/* <div
-              className="card"
-              style={{ borderRadius: "1rem", lineHeight: "1rem" }}
-            >
+        {!isMobile && (
+          <div className="d-flex">
+            <div className="m-5" style={{ width: "20rem" }}>
               <div
-                className="d-flex justify-content-between align-items-center card-body"
-                style={{
-                  boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
-                  borderRadius: "1rem",
-                }}
+                className="card"
+                style={{ borderRadius: "1rem", lineHeight: "1rem" }}
               >
-                <div>Sort by</div>
                 <div
+                  className="d-flex justify-content-between align-items-center card-body"
                   style={{
-                    border: "1px solid",
-                    borderColor: "white",
-                    borderRadius: "1.5rem",
-                    boxShadow: "0rem 0.25rem 0.25rem 0rem #407BFF",
+                    boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
+                    borderRadius: "1rem",
                   }}
                 >
-                  <img
-                    src={DownArrowPic}
-                    alt="DownArrowPic"
-                    width="28rem"
-                    style={{ padding: "0.3rem" }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="card" style={{ marginTop: "1rem" }}>
-              <div
-                className="card-body"
-                style={{
-                  boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
-                }}
-              >
-                <div className="d-flex justify-content-between align-items-center">
-                  <h5>Filter</h5>
-                  <img
-                    src={BlueDownArrow}
-                    alt="BlueDownArrow"
-                    width="17rem"
-                    height="10rem"
-                  />
-                </div>
-                <img src={Line} alt="LinePic" width="18rem" />
-                <div className="d-flex justify-content-between align-items-center">
-                  <h6>Budget</h6>
-                  <img
-                    src={BlueDownArrow}
-                    alt="BlueDownArrow"
-                    width="17rem"
-                    height="10rem"
-                  />
-                </div>
-                <img src={Line} alt="LinePic" width="18rem" />
-                <div className="d-flex justify-content-between align-items-center">
-                  <h6>Experience</h6>
-                  <img
-                    src={BlueDownArrow}
-                    alt="BlueDownArrow"
-                    width="17rem"
-                    height="10rem"
-                  />
-                </div>
-                <img src={Line} alt="LinePic" width="18rem" />
-                <div className="d-flex justify-content-between align-items-center">
-                  <h6>Portfolio</h6>
-                  <img
-                    src={BlueDownArrow}
-                    alt="BlueDownArrow"
-                    width="17rem"
-                    height="10rem"
-                  />
-                </div>
-                <img src={Line} alt="LinePic" width="18rem" />
-                <div className="d-flex justify-content-between align-items-center">
-                  <h6>Timeline</h6>
-                  <img
-                    src={BlueDownArrow}
-                    alt="BlueDownArrow"
-                    width="17rem"
-                    height="10rem"
-                  />
-                </div>
-                <img src={Line} alt="LinePic" width="18rem" />
-                <div className="d-flex justify-content-between align-items-center">
-                  <h6>Start Date</h6>
-                  <img
-                    src={BlueDownArrow}
-                    alt="BlueDownArrow"
-                    width="17rem"
-                    height="10rem"
-                  />
-                </div>
-                <img src={Line} alt="LinePic" width="18rem" />
-              </div>
-            </div> */}
-            <div
-              className="card"
-              style={{
-                // marginTop: "10rem",
-                backgroundColor: "#F6F6FD",
-                borderRadius: "3rem",
-                boxShadow:
-                  "0.3125rem 0.25rem 0.4375rem 0rem rgba(121, 168, 224, 0.65)",
-              }}
-            >
-              <div className="card-body">
-                <h3>Why Choose Bizowl?</h3>
-                {whyChooseBizowl?.map((item, index) => (
+                  <div>Sort by</div>
                   <div
-                    key={index}
                     style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "start",
-                      alignItems: "center",
-                      marginTop: "0.5rem",
-                      marginBottom: "0.5rem",
+                      border: "1px solid",
+                      borderColor: "white",
+                      borderRadius: "1.5rem",
+                      boxShadow: "0rem 0.25rem 0.25rem 0rem #407BFF",
                     }}
                   >
-                    <img alt="" src={item?.image} />
-                    <h6 style={{ marginLeft: "1rem" }}>{item?.reason}</h6>
+                    <img
+                      src={DownArrowPic}
+                      alt="DownArrowPic"
+                      width="28rem"
+                      style={{ padding: "0.3rem" }}
+                    />
                   </div>
-                ))}
+                </div>
+              </div>
+              <div className="card" style={{ marginTop: "1rem" }}>
+                <div
+                  className="card-body"
+                  style={{
+                    boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
+                  }}
+                >
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h5>Filter</h5>
+                    <img
+                      src={BlueDownArrow}
+                      alt="BlueDownArrow"
+                      width="17rem"
+                      height="10rem"
+                    />
+                  </div>
+                  <img src={Line} alt="LinePic" width="18rem" />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h6>Budget</h6>
+                    <img
+                      src={BlueDownArrow}
+                      alt="BlueDownArrow"
+                      width="17rem"
+                      height="10rem"
+                    />
+                  </div>
+                  <img src={Line} alt="LinePic" width="18rem" />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h6>Experience</h6>
+                    <img
+                      src={BlueDownArrow}
+                      alt="BlueDownArrow"
+                      width="17rem"
+                      height="10rem"
+                    />
+                  </div>
+                  <img src={Line} alt="LinePic" width="18rem" />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h6>Portfolio</h6>
+                    <img
+                      src={BlueDownArrow}
+                      alt="BlueDownArrow"
+                      width="17rem"
+                      height="10rem"
+                    />
+                  </div>
+                  <img src={Line} alt="LinePic" width="18rem" />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h6>Timeline</h6>
+                    <img
+                      src={BlueDownArrow}
+                      alt="BlueDownArrow"
+                      width="17rem"
+                      height="10rem"
+                    />
+                  </div>
+                  <img src={Line} alt="LinePic" width="18rem" />
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h6>Start Date</h6>
+                    <img
+                      src={BlueDownArrow}
+                      alt="BlueDownArrow"
+                      width="17rem"
+                      height="10rem"
+                    />
+                  </div>
+                  <img src={Line} alt="LinePic" width="18rem" />
+                </div>
+              </div>
+              <div
+                className="card"
+                style={{
+                  marginTop: "10rem",
+                  backgroundColor: "#F6F6FD",
+                  borderRadius: "3rem",
+                  boxShadow:
+                    "0.3125rem 0.25rem 0.4375rem 0rem rgba(121, 168, 224, 0.65)",
+                }}
+              >
+                <div className="card-body">
+                  <h3>Why Choose Bizowl?</h3>
+                  {whyChooseBizowl?.map((item, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "start",
+                        alignItems: "center",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      <img alt="" src={item?.image} />
+                      <h6 style={{ marginLeft: "1rem" }}>{item?.reason}</h6>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div
+                className="card"
+                style={{
+                  marginTop: "5rem",
+                  borderRadius: "3rem",
+                  boxShadow:
+                    "0.3125rem 0.25rem 0.4375rem 0rem rgba(121, 168, 224, 0.65)",
+                }}
+              >
+                <div className="card-body">
+                  <h3>Best Practices</h3>
+                  <p>
+                    Do not share you number your number with your business
+                    partner.
+                  </p>
+                  <img src={Image1} alt="Image1" width="100px" />
+                </div>
               </div>
             </div>
             <div
-              className="card"
               style={{
-                marginTop: "5rem",
-                borderRadius: "3rem",
-                boxShadow:
-                  "0.3125rem 0.25rem 0.4375rem 0rem rgba(121, 168, 224, 0.65)",
+                marginBottom: comparisonTrayVisible ? "100px" : "0px",
+
+                transition: "margin-bottom 0.5s ease-in-out",
               }}
             >
-              <div
-                className="card-body"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <h3>Best Practices</h3>
-                <p>
-                  Do not share you number your number with your business
-                  partner.
-                </p>
-                <img src={Image1} alt="Image1" width="100px" />
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div
-            className="card"
-            style={{
-              // marginTop: "10rem",
-              margin: "2rem",
-              backgroundColor: "#F6F6FD",
-              borderRadius: "3rem",
-              boxShadow:
-                "0.3125rem 0.25rem 0.4375rem 0rem rgba(121, 168, 224, 0.65)",
-            }}
-          >
-            <div className="card-body">
-              <h3>Why Choose Bizowl?</h3>
-              {whyChooseBizowl?.map((item, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginTop: "0.5rem",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  <img alt="" src={item?.image} />
-                  <h6 style={{ marginLeft: "1rem" }}>{item?.reason}</h6>
+              {partners.map((item, index) => (
+                <div className="m-5 d-flex">
+                  <div
+                    key={index}
+                    className="card"
+                    style={{
+                      height: isMobile ? "6rem" : "8rem",
+                      width: isMobile ? "9rem" : "11rem",
+                      backgroundColor: item?.bgColor,
+                      border: "0.2rem solid",
+                      borderColor: "white",
+                    }}
+                  >
+                    <div className="card-body">
+                      <div
+                        className="d-flex justify-content-between"
+                        style={{
+                          border: "2px solid",
+                          borderColor: item?.borderColor,
+                          borderRadius: "0.5rem",
+                          padding: "0.5rem",
+                          width: "100%",
+                          fontSize: "large",
+                          backgroundColor: "#F7FCFB",
+                        }}
+                      >
+                        {item?.letters.map((letter, index) => (
+                          <div key={index}>
+                            <span
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2rem",
+                                color: letter?.color1,
+                              }}
+                            >
+                              {letter?.letter1}
+                            </span>
+                            <span
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2rem",
+                                color: letter?.color2,
+                              }}
+                            >
+                              {letter?.letter2}
+                            </span>
+                            <span
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2rem",
+                                color: letter?.color3,
+                              }}
+                            >
+                              {letter?.letter3}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <p style={{ color: "#407BFF", fontSize: "small" }}>
+                        Portfolio
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      marginBottom: "2rem",
+                      boxShadow: "0.25rem 0.25rem 0.9375rem 0px #407BFF6B",
+                    }}
+                  >
+                    <div
+                      className="card"
+                      style={{ width: isMobile ? "14rem" : "35rem" }}
+                    >
+                      <div className="card-body d-flex justify-content-between">
+                        <div className="d-flex flex-column align-items-start">
+                          <h5
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: isMobile && "1rem",
+                            }}
+                          >
+                            Features
+                          </h5>
+                          <p style={{ fontSize: isMobile && "0.8rem" }}>
+                            2 Revisions
+                          </p>
+                          <p style={{ fontSize: isMobile && "0.8rem" }}>
+                            24*7 Support
+                          </p>
+                          <p style={{ fontSize: isMobile && "0.8rem" }}>
+                            3 Samples to choose
+                          </p>
+                        </div>
+                        <div
+                          className="d-flex flex-column justify-content-start"
+                          style={{ fontSize: "0.9rem" }}
+                        >
+                          <div>
+                            <h6>Timeline</h6>
+                            <p style={{ fontWeight: "bold" }}>2 Weeks</p>
+                          </div>
+                          <div>
+                            <h6>Start Date</h6>
+                            <p style={{ fontWeight: "bold" }}>Immediately</p>
+                          </div>
+                          <div>
+                            <h6>Payment Structure</h6>
+                            <p style={{ fontWeight: "bold" }}>2 Installments</p>
+                          </div>
+                        </div>
+                        <div>
+                          <div>
+                            <h6 style={{ fontSize: "small" }}>
+                              Total Price Included GST
+                            </h6>
+                            <p style={{ fontWeight: "bold" }}>₹ 11,500</p>
+                          </div>
+                          <button className="btn btn-primary btn-sm">
+                            Get Started
+                          </button>
+                          <div style={{ marginTop: "1rem" }}>
+                            <text style={{ fontSize: "small" }}>
+                              Communicate
+                            </text>
+                            <div
+                              className="d-flex justify-content-evenly"
+                              style={{ fontSize: "small" }}
+                            >
+                              <button className="btn btn-primary btn-sm">
+                                <img
+                                  src={MessageImg}
+                                  alt="MessageImg"
+                                  width={isMobile ? "14rem" : "20rem"}
+                                  // height={isMobile ? "15rem" : "20rem"}
+                                />
+                              </button>
+                              <button className="btn btn-primary btn-sm">
+                                <img
+                                  src={PhoneImg}
+                                  alt="PhoneImg"
+                                  width={isMobile ? "14rem" : "20rem"}
+                                  // height="20rem"
+                                />
+                              </button>
+                              <button className="btn btn-primary btn-sm">
+                                <img
+                                  src={VideoImg}
+                                  alt="VideoImg"
+                                  width={isMobile ? "14rem" : "20rem"}
+                                  // height="20rem"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="card">
+                      <div
+                        className="d-flex justify-content-end card-body"
+                        style={{ backgroundColor: "#F1FFFC " }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Checkbox
+                            checked={isChecked[item.id] || false}
+                            onChange={(event) =>
+                              handleCheckboxChange(event, item.id)
+                            }
+                            disabled={
+                              selectedServices.length >= 3 && !item.isChecked
+                            }
+                          />
+                          <Typography>Add To Compare</Typography>
+                        </div>
+                        {/* <div className="d-flex flex-column align-items-start">
+                          <h6>Total Experience</h6>
+                          <text style={{ fontWeight: "bold" }}>5 Years</text>
+                        </div>
+                        <div className="d-flex flex-column align-items-start">
+                          <h6>Ratings</h6>
+                          <div
+                            style={{ display: "flex", flexDirection: "row" }}
+                          >
+                            {Array.from({ length: ratings }, (_, index) => (
+                              <img
+                                key={index}
+                                src={Star}
+                                alt="Star"
+                                width="20rem"
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="d-flex flex-column">
+                          <h6>Post Service</h6>
+                          <text style={{ fontWeight: "bold" }}>Yes</text>
+                        </div> */}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-          <div
-            className="card"
-            style={{
-              marginTop: "5rem",
-              margin: "2rem",
-              borderRadius: "3rem",
-              boxShadow:
-                "0.3125rem 0.25rem 0.4375rem 0rem rgba(121, 168, 224, 0.65)",
-            }}
-          >
-            <div
-              className="card-body"
+        )}
+        {/* {comparisonTrayVisible && (
+          <div className="comparison-tray">
+            <ul style={{ display: "flex", flexDirection: "row" }}>
+              {selectedServices.map((service, index) => (
+                <li style={{ listStyle: "none", padding: "5px", border: "1px solid black" }} key={index}>
+                  <span>{service}</span>
+                  <CloseIcon
+                    className="close-icon"
+                    onClick={() => handleRemoveFromComparisonTray(service)}
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <button onClick={handleCompare}>Compare</button>
+
+            <button onClick={handleCancel}>Cancel</button>
+          </div>
+        )} */}
+
+        {comparisonTrayVisible && (
+          <div className="comparison-tray">
+            <ul
               style={{
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "space-between",
                 alignItems: "center",
+                width: isMobile ? "100%" : "70%",
               }}
             >
-              <h3>Best Practices</h3>
-              <p>
-                Do not share you number your number with your business partner.
-              </p>
-              <img src={Image1} alt="Image1" width="100px" />
+              {partners
+                .filter((partner) => selectedServices.includes(partner.id))
+                .map((service) => (
+                  <li
+                    style={{
+                      listStyle: "none",
+                      padding: !isMobile && "5px",
+                      flexBasis: "auto",
+                      flexGrow: 1,
+                      margin: "10px",
+                      borderRadius: "10px",
+                      boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                      display: "flex", // Ensure the li itself is a flex container
+                      flexDirection: "column", // Stack children vertically
+                      alignItems: "center", // Center-align children horizontally
+                      textAlign: "center",
+                      position: "relative",
+                    }}
+                    key={service.id}
+                  >
+                    <CloseIcon
+                      className="close-icon"
+                      onClick={() => handleRemoveFromComparisonTray(service.id)}
+                      style={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                        cursor: "pointer",
+                      }}
+                    />
+                    <div
+                      className="d-flex"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        height: !isMobile && "100px",
+                      }}
+                    >
+                      {/* Card structure */}
+                      <div
+                        className="card"
+                        style={{
+                          height: isMobile ? "6rem" : "2rem",
+                          width: isMobile ? "3rem" : "12rem",
+                          border: "0.2rem solid",
+                          borderColor: "white",
+                        }}
+                      >
+                        <div
+                          className="card-body"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div
+                            className={
+                              isMobile
+                                ? "d-flex justify-content-center"
+                                : "d-flex justify-content-between"
+                            }
+                            style={{
+                              border: "2px solid",
+                              borderColor: service.borderColor,
+                              borderRadius: "0.5rem",
+                              padding: "0.5rem",
+                              width: !isMobile && "100%",
+                              height: "50px",
+                              fontSize: "large",
+                              backgroundColor: "#F7FCFB",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            {/* Safely map over service.letters */}
+                            {(service.letters || []).map((letter) => (
+                              <div key={letter.id}>
+                                <span
+                                  style={{
+                                    fontWeight: "bold",
+                                    fontSize: isMobile ? "1rem" : "2rem",
+                                    color: letter.color1,
+                                  }}
+                                >
+                                  {letter.letter1}
+                                </span>
+                                <span
+                                  style={{
+                                    fontWeight: "bold",
+                                    fontSize: isMobile ? "1rem" : "2rem",
+                                    color: letter.color2,
+                                  }}
+                                >
+                                  {letter.letter2}
+                                </span>
+                                <span
+                                  style={{
+                                    fontWeight: "bold",
+                                    fontSize: isMobile ? "1rem" : "2rem",
+                                    color: letter.color3,
+                                  }}
+                                >
+                                  {letter.letter3}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                          <p style={{ color: "#407BFF", fontSize: "small" }}>
+                            Portfolio
+                          </p>
+                        </div>
+                      </div>
+                      {/* Additional card structure and content */}
+                    </div>
+                  </li>
+                ))}
+              {[...Array(3 - selectedServices.length)].map((_, index) => (
+                <li
+                  key={`placeholder-${index}`}
+                  style={{
+                    listStyle: "none",
+                    padding: "5px",
+                    flexBasis: "auto",
+                    flexGrow: 1,
+                    margin: "10px",
+                    borderRadius: "10px",
+                    // boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                    border: "1px solid #407bff", // Add a border
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: isMobile ? "6rem" : "7rem",
+                  }}
+                >
+                  <Typography variant="body2" color="#407bff">
+                    Add a Plan
+                  </Typography>
+                </li>
+              ))}
+            </ul>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: !isMobile && "30%",
+                padding: !isMobile && "0 3rem 0 3rem"
+              }}
+            >
+              <Button
+                variant="contained"
+                onClick={handleCompare}
+                style={{ flex: 1, margin: "10px" }}
+              >
+                Compare
+              </Button>
+              <Button
+              variant="outlined"
+                onClick={handleCancel}
+                style={{ flex: 1, margin: "10px" }}
+              >
+                Cancel
+              </Button>
             </div>
           </div>
-        </>
-      )}
+        )}
+        {isMobile && <FilterComponent />}
+        {isMobile && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
+          >
+            {partners.map((item, index) => (
+              <Center>
+                <Card
+                  key={index}
+                  sx={{
+                    marginBottom: 2,
+                    maxWidth: "70%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    borderRadius: "20px",
+                  }}
+                >
+                  <CardContent>
+                    <Grid container spacing={isMobile ? 1 : 2}>
+                      {/* Top Side: Three Letter Name and Portfolio */}
+                      <Grid item xs={12} sm={4}>
+                        <Box
+                          sx={{ backgroundColor: item?.bgColor, padding: 2 }}
+                        >
+                          <Center>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                border: "2px solid",
+                                borderColor: item?.borderColor,
+                                borderRadius: "0.5rem",
+                                padding: "0.5rem",
+                                width: "50%",
+                                backgroundColor: "#F7FCFB",
+                              }}
+                            >
+                              {item?.letters.map((letter, idx) => (
+                                <Typography
+                                  key={idx}
+                                  variant="h5"
+                                  component="span"
+                                >
+                                  <span
+                                    style={{
+                                      fontWeight: "bold",
+                                      fontSize: "1.5rem", // Adjusted font size
+                                      color: letter?.color1,
+                                    }}
+                                  >
+                                    {letter?.letter1}
+                                  </span>
+                                  <span
+                                    style={{
+                                      fontWeight: "bold",
+                                      fontSize: "1.5rem", // Adjusted font size
+                                      color: letter?.color2,
+                                    }}
+                                  >
+                                    {letter?.letter2}
+                                  </span>
+                                  <span
+                                    style={{
+                                      fontWeight: "bold",
+                                      fontSize: "1.5rem", // Adjusted font size
+                                      color: letter?.color3,
+                                    }}
+                                  >
+                                    {letter?.letter3}
+                                  </span>
+                                </Typography>
+                              ))}
+                            </Box>
+                          </Center>
+                          <Typography variant="body2">Portfolio</Typography>
+                        </Box>
+                      </Grid>
+
+                      {/* Middle: Features */}
+                      <Grid item xs={12} sm={4}>
+                        <Typography variant="h6">Features</Typography>
+                        <ul style={{ listStyle: "none" }}>
+                          <li>2 Revisions</li>
+                          <li>24*7 Support</li>
+                          <li>3 Samples to choose</li>
+                        </ul>
+                      </Grid>
+
+                      {/* Right Side: Timeline Details */}
+                      <Grid item xs={12} sm={4}>
+                        <Typography variant="h6">Timeline</Typography>
+                        <p>
+                          <strong>Start Date:</strong> Immediately
+                        </p>
+                        <p>
+                          <strong>Duration:</strong> 2 Weeks
+                        </p>
+                        <p>
+                          <strong>Payment Structure:</strong> 2 Installments
+                        </p>
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <CardContent>
+                    <Box
+                      sx={{
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {/* Total Experience */}
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: 2,
+                        }}
+                      >
+                        <Typography variant="h6">Total Experience</Typography>
+                        <Typography variant="subtitle1">
+                          <strong>5 Years</strong>
+                        </Typography>
+                      </Box>
+
+                      {/* Ratings */}
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: 2,
+                        }}
+                      >
+                        <Typography variant="h6">Ratings</Typography>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 1,
+                          }}
+                        >
+                          {Array.from({ length: ratings }, (_, idx) => (
+                            <img key={idx} src={Star} alt="Star" width="20px" />
+                          ))}
+                        </Box>
+                      </Box>
+
+                      {/* Post Service */}
+                      <Box
+                        sx={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography variant="h6">Post Service</Typography>
+                        <Typography variant="subtitle1">
+                          <strong>Yes</strong>
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                  {/* Pricing Section and Get Started Button */}
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      Total Price Included GST
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{ mb: "10px", fontWeight: "bold" }}
+                    >
+                      ₹11,500
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      fullWidth
+                    >
+                      Get Started
+                    </Button>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginTop: "1rem",
+                      }}
+                    >
+                      <Checkbox
+                        checked={isChecked[item.id] || false}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, item.id)
+                        }
+                        disabled={
+                          selectedServices.length >= 3 && !item.isChecked
+                        }
+                      />
+                      <Typography>Add To Compare</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Center>
+            ))}
+          </div>
+        )}
+      </div>
       <PopupModal />
     </div>
   );

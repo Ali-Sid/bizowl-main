@@ -67,7 +67,7 @@ const Blogs = () => {
     <>
       <NavBar />
       <div className="homepageContainer">
-        {SubHeader("Blogs", "blogs", "home", "home")}
+        {SubHeader("Blogs", "resources/blogs", "home", "")}
 
         <div className="blogsSec">
           <div className="BigTitleContainer">
@@ -81,7 +81,7 @@ const Blogs = () => {
               <Row md={12}>
                 {blogPosts.map((post) => (
                   <Col key={post.id} md={6} className="marginTop20">
-                    <Link to={`/blogs/${post.tag}/${post.urlTitle}`}>
+                    <Link to={`/resources/blogs/${post.tag}/${post.urlTitle}`}>
                       {" "}
                       {/* Use Link component for each blog post */}
                       <BlogsBigCard2  
