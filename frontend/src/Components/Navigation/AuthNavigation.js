@@ -99,7 +99,7 @@ const AuthNavigation = () => {
         />
         <Route
           exact
-          path="/pressReleaseForm"
+          path="/services/press-release-distribution"
           name="Project Creation"
           element={
             <ProtectedRoutes Component={FirstForm} accessRights={"guest"} />
