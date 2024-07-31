@@ -238,109 +238,119 @@ export const OurMoreServicesDesign = (
       show={loginWindow}
       onHide={() => serviceWindowFunction(false)}
     >
-      <Modal.Header className="loginHeaderStyle">
-        <div className="flexDivCenterPhone">
-          <div className="BigTitleText fontSize25">
-            {" "}
-            More{" "}
-            <span className="BigTitleHighlightedText fontSize25">
-              Our Services
-            </span>
-          </div>
-          <div className="flex items-center abc">
-            <div>
-              <BsSearch className="searchIcon" />
-              <input
-                type={"text"}
-                value={serviceSearchValue}
-                onChange={(e) => {
-                  setServiceSearchValue(e.target.value);
-                }}
-                style={{ paddingInline: 30 }}
-                placeholder="Search For Service"
-                className="inputStyleCommon borderRadius100"
+      <div className="h-[97vh]">
+        <Modal.Header className="loginHeaderStyle">
+          <div className="flexDivCenterPhone">
+            <div className="BigTitleText fontSize25">
+              {" "}
+              More{" "}
+              <span className="BigTitleHighlightedText fontSize25">
+                Our Services
+              </span>
+            </div>
+            <div className="flex items-center abc">
+              <div>
+                <BsSearch className="searchIcon" />
+                <input
+                  type={"text"}
+                  value={serviceSearchValue}
+                  onChange={(e) => {
+                    setServiceSearchValue(e.target.value);
+                  }}
+                  style={{ paddingInline: 30 }}
+                  placeholder="Search For Service"
+                  className="inputStyleCommon borderRadius100"
+                />
+              </div>
+              <FaTimes
+                className="closeIcon"
+                onClick={() => serviceWindowFunction(false)}
               />
             </div>
-            <FaTimes
-              className="closeIcon"
-              onClick={() => serviceWindowFunction(false)}
-            />
           </div>
-        </div>
-      </Modal.Header>
+        </Modal.Header>
 
-      <Modal.Body className="overflow-hidden">
-        <div className="serviceStyle overflow-hidden">
-          <div className="serviceTypeHead flex  overflow-auto">
-            {serviceHeadList.map((res, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    setSelectedServiceName(res.value);
-                  }}
-                  key={index}
-                  className={
-                    selectedServiceName === res.value
-                      ? "selectedServiceType cardSection"
-                      : "serviceType cardSection"
-                  }
-                >
-                  {res.label}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="serviceBodySection overflow-hidden">
-          <div className="serviceTypeTitle marginTop20 overflow-hidden">
-            <div className="BigTitleText fontSize20 overflow-hidden">
-              {" "}
-              <span className="BigTitleHighlightedText fontSize25">
-                {" "}
-                <FaMinus />{" "}
-              </span>{" "}
-              {!serviceSearchValue ? selectedServiceName : "Search Data"}{" "}
+        <Modal.Body className="overflow-hidden">
+          <div className="serviceStyle overflow-hidden">
+            <div className="serviceTypeHead flex  overflow-auto">
+              {serviceHeadList.map((res, index) => {
+                return (
+                  <div
+                    onClick={() => {
+                      setSelectedServiceName(res.value);
+                    }}
+                    key={index}
+                    className={
+                      selectedServiceName === res.value
+                        ? "selectedServiceType cardSection"
+                        : "serviceType cardSection"
+                    }
+                  >
+                    {res.label}
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <div className="serviceTypeBody">
-            <Row>
-              {serviceBodyList.map((res, index) => {
-                console.log(res);
-                if (res.type === selectedServiceName && !serviceSearchValue) {
-                  return (
-                    <Col key={index} md={3} xs={6}>
-                      <div
-                        className="servicesList"
-                        onClick={() => {
-                          WindowOpenLink("/projectCreation", "_self");
-                        }}
-                      >
-                        <img src={res.image} alt="" className="serviceImage" />
-                        <div className="serviceImageText">{res.name}</div>
-                      </div>
-                    </Col>
-                  );
-                } else if (serviceSearchValue) {
-                  return (
-                    <Col key={index} md={3} xs={6}>
-                      <div
-                        className="servicesList"
-                        onClick={() => {
-                          WindowOpenLink("/projectCreation", "_self");
-                        }}
-                      >
-                        <img src={res.image} alt="" className="serviceImage" />
-                        <div className="serviceImageText">{res.name}</div>
-                      </div>
-                    </Col>
-                  );
-                }
-              })}
-            </Row>
+
+          <div className="serviceBodySection overflow-hidden">
+            <div className="serviceTypeTitle marginTop20 overflow-hidden">
+              <div className="BigTitleText fontSize20 overflow-hidden">
+                {" "}
+                <span className="BigTitleHighlightedText fontSize25">
+                  {" "}
+                  <FaMinus />{" "}
+                </span>{" "}
+                {!serviceSearchValue ? selectedServiceName : "Search Data"}{" "}
+              </div>
+            </div>
+            <div className="serviceTypeBody">
+              <Row>
+                {serviceBodyList.map((res, index) => {
+                  console.log(res);
+                  if (res.type === selectedServiceName && !serviceSearchValue) {
+                    return (
+                      <Col key={index} md={3} xs={6}>
+                        <div
+                          className="servicesList"
+                          onClick={() => {
+                            WindowOpenLink("/pressReleaseForm", "_self");
+                          }}
+                        >
+                          <img
+                            src={res.image}
+                            alt=""
+                            className="serviceImage"
+                          />
+                          <div className="serviceImageText">{res.name}</div>
+                        </div>
+                      </Col>
+                    );
+                  } else if (serviceSearchValue) {
+                    return (
+                      <Col key={index} md={3} xs={6}>
+                        <div
+                          className="servicesList"
+                          onClick={() => {
+                            WindowOpenLink("/projectCreation", "_self");
+                          }}
+                        >
+                          <img
+                            src={res.image}
+                            alt=""
+                            className="serviceImage"
+                          />
+                          <div className="serviceImageText">{res.name}</div>
+                        </div>
+                      </Col>
+                    );
+                  }
+                })}
+              </Row>
+            </div>
           </div>
-        </div>
-      </Modal.Body>
+        </Modal.Body>
+      </div>
     </Modal>
   );
 };

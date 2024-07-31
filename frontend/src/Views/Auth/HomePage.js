@@ -72,8 +72,8 @@ const HomePage = () => {
       label: " Fundamental Services",
     },
     {
-      value: "Press Release",
-      label: "Press Release",
+      value: "PR",
+      label: "PR",
     },
     { value: "Web Development", label: "Web Development" },
     { value: "Digital Marketing", label: "Digital Marketing" },
@@ -83,6 +83,11 @@ const HomePage = () => {
   ];
 
   const serviceBodyListData = [
+    {
+      name: "Press Release",
+      image: "Images/services/Marketing/PR.png",
+      type: "PR",
+    },
     //************************************Business Fundamental Services************************** */
     {
       name: "Market Research",
