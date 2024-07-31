@@ -306,6 +306,7 @@ export const OurMoreServicesDesign = (
           <div className="serviceTypeBody">
             <Row>
               {serviceBodyList.map((res, index) => {
+                console.log(res);
                 if (res.type === selectedServiceName && !serviceSearchValue) {
                   return (
                     <Col key={index} md={3} xs={6}>
