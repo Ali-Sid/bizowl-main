@@ -19,6 +19,7 @@ import RefundPolicy from "../../Views/Auth/RefundPolicy";
 import SpecificBlogs from "../../Views/Auth/blogs/SpecificBlogs";
 import SpecificBlog2 from "../../Views/Auth/blogs/SpecificBlog2";
 import BlogToDisplay from "../../Views/Auth/blogs/BlogToDisplay";
+import FirstForm from "../../Views/Auth/PressReleaseForm";
 
 const AuthNavigation = () => {
   const AllRoutes = () => {
@@ -101,10 +102,7 @@ const AuthNavigation = () => {
           path="/pressReleaseForm"
           name="Project Creation"
           element={
-            <ProtectedRoutes
-              Component={ProjectCreation}
-              accessRights={"guest"}
-            />
+            <ProtectedRoutes Component={FirstForm} accessRights={"guest"} />
           }
         />
         <Route
