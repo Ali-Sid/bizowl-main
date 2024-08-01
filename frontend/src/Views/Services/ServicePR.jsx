@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //assets
 import BizowalLogo from "./assets/logo-of-BIZOWL--Business-Services.png";
 import PhonePic from "./assets/Vector (1).png";
@@ -32,6 +32,8 @@ import "./serviceStyle.scss";
 import { Center } from "@chakra-ui/react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { partnerDB } from "../../config/firebase";
 
 const ServicePR = () => {
   const [ratings, setRatings] = useState(5);
@@ -39,126 +41,12 @@ const ServicePR = () => {
   const [isChecked, setIsChecked] = useState({});
   const [comparisonTrayVisible, setComparisonTrayVisible] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [partners, setPartners] = useState([]);
   const navigate = useNavigate();
 
   const isMobile = useMediaQuery("(max-width:768px)");
 
-  const partners = [
-    {
-      id: 1,
-      letters: [
-        {
-          letter1: "C",
-          color1: "#455A64",
-        },
-        {
-          letter2: "R",
-          color2: "#70A6E6",
-        },
-        {
-          letter3: "B",
-          color3: "#455A64",
-        },
-      ],
-      bgColor: "rgba(246, 246, 253, 0.8)",
-      borderColor: "#70A6E6",
-    },
-    {
-      id: 2,
-      letters: [
-        {
-          letter1: "D",
-          color1: "#455A64",
-        },
-        {
-          letter2: "G",
-          color2: "#A0A3D8",
-        },
-        {
-          letter3: "S",
-          color3: "#455A64",
-        },
-      ],
-      bgColor: "rgba(229, 230, 249, 0.8)",
-      borderColor: "#A0A3D8",
-    },
-    {
-      id: 3,
-      letters: [
-        {
-          letter1: "S",
-          color1: "#455A64",
-        },
-        {
-          letter2: "D",
-          color2: "#0E3768",
-        },
-        {
-          letter3: "O",
-          color3: "#455A64",
-        },
-      ],
-      bgColor: "rgba(229, 225, 249, 0.8)",
-      borderColor: "#0E3768",
-    },
-    {
-      id: 4,
-      letters: [
-        {
-          letter1: "W",
-          color1: "#455A64",
-        },
-        {
-          letter2: "X",
-          color2: "#CF9DBB",
-        },
-        {
-          letter3: "T",
-          color3: "#455A64",
-        },
-      ],
-      bgColor: "#FFEEF7",
-      borderColor: "#FFBBE1",
-    },
-    {
-      id: 5,
-      letters: [
-        {
-          letter1: "A",
-          color1: "#455A64",
-        },
-        {
-          letter2: "P",
-          color2: "#A1D4C9",
-        },
-        {
-          letter3: "K",
-          color3: "#455A64",
-        },
-      ],
-      bgColor: "#E1F2EF",
-      borderColor: "#A1D4C9",
-    },
-    {
-      id: 6,
-      letters: [
-        {
-          letter1: "S",
-          color1: "#455A64",
-        },
-        {
-          letter2: "U",
-          color2: "#EAD39C",
-        },
-        {
-          letter3: "M",
-          color3: "#455A64",
-        },
-      ],
-      bgColor: "rgba(255, 249, 234, 0.8)",
-      borderColor: "#EAD39C",
-    },
-  ];
+
   const whyChooseBizowl = [
     {
       image: Growth,
@@ -191,6 +79,48 @@ const ServicePR = () => {
       alt: "Experience",
     },
   ];
+
+  const colors = [
+    "rgba(246, 246, 253, 0.8)",
+    "rgba(229, 230, 249, 0.8)",
+    "rgba(229, 225, 249, 0.8)",
+    "rgba(255, 238, 247, 0.8)",
+    "rgba(225, 242, 239, 0.8)",
+    "rgba(255, 249, 234, 0.8)",
+  ];
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(partnerDB, "prServices"));
+        const getPartners = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          const letters = [
+            { letter: data.displayName, color: getRandomColor() },
+          ];
+          return {
+            ...data,
+            id: data.id,
+            letters,
+            bgColor: colors[Math.floor(Math.random() * colors.length)],
+            borderColor: getRandomColor(),
+          };
+        });
+        console.log('Mapped Partners Data:', getPartners);
+        setPartners(getPartners);
+      } catch (error) {
+        console.error("Error fetching partners data:", error);
+      }
+    };
+
+    const getRandomColor = () => {
+      const h = Math.floor(Math.random() * 360);
+      const s = Math.floor(Math.random() * 100);
+      const l = Math.floor(Math.random() * 100);
+      return `hsl(${h}, ${s}%, ${l}%)`;
+    };
+    fetchPartners();
+  }, []);
 
   const handleCheckboxChange = (event, serviceId) => {
     if (selectedServices.length >= 3 && event.target.checked) {
@@ -427,10 +357,10 @@ const ServicePR = () => {
                 transition: "margin-bottom 0.5s ease-in-out",
               }}
             >
-              {partners.map((item, index) => (
+              {partners.map((item) => (
                 <div className="m-5 d-flex align-items-center">
                   <div
-                    key={index}
+                    key={item.id}
                     className="card"
                     style={{
                       height: isMobile ? "6rem" : "13rem",
@@ -474,12 +404,12 @@ const ServicePR = () => {
                               style={{
                                 fontWeight: "bold",
                                 fontSize: "2rem",
-                                color: letter?.color1,
+                                color: letter?.color,
                               }}
                             >
-                              {letter?.letter1}
+                              {letter?.letter}
                             </span>
-                            <span
+                            {/* <span
                               style={{
                                 fontWeight: "bold",
                                 fontSize: "2rem",
@@ -496,7 +426,7 @@ const ServicePR = () => {
                               }}
                             >
                               {letter?.letter3}
-                            </span>
+                            </span> */}
                           </div>
                         ))}
                       </div>
@@ -505,12 +435,21 @@ const ServicePR = () => {
                   <div
                     style={{
                       boxShadow: "0.25rem 0.25rem 0.9375rem 0px #407BFF6B",
-                      borderTopRightRadius: "15px", borderBottomRightRadius: "15px",
+                      borderTopRightRadius: "15px",
+                      borderBottomRightRadius: "15px",
                     }}
                   >
                     <div
                       className="card"
-                      style={{ width: isMobile ? "14rem" : "35rem", borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px", borderTopRightRadius: "15px", borderBottomRightRadius: "15px", border: "none" }}
+                      style={{
+                        height: isMobile ? "6rem" : "13rem",
+                        width: isMobile ? "14rem" : "35rem",
+                        borderTopLeftRadius: "0px",
+                        borderBottomLeftRadius: "0px",
+                        borderTopRightRadius: "15px",
+                        borderBottomRightRadius: "15px",
+                        border: "none",
+                      }}
                     >
                       <div
                         className="card-body d-flex justify-content-between"
@@ -519,7 +458,7 @@ const ServicePR = () => {
                         <div className="d-flex flex-column align-items-start">
                           <div className="d-flex flex-column align-items-start">
                             <h6>Distribution Outlets</h6>
-                            <p style={{ fontWeight: "bold" }}>150+</p>
+                            <p style={{ fontWeight: "bold" }}>{item?.outlets}</p>
                           </div>
                           <div
                             className="d-flex flex-column align-items-start"
@@ -540,11 +479,11 @@ const ServicePR = () => {
                         >
                           <div>
                             <h6>Delivery</h6>
-                            <p style={{ fontWeight: "bold" }}>Same Day</p>
+                            <p style={{ fontWeight: "bold" }}>{item?.delivery}</p>
                           </div>
                           <div>
                             <h6>Geo-Tagging</h6>
-                            <p style={{ fontWeight: "bold" }}>Yes</p>
+                            <p style={{ fontWeight: "bold" }}>{item?.geoTag ? "Yes" : "No"}</p>
                           </div>
                         </div>
                         <div
@@ -558,7 +497,7 @@ const ServicePR = () => {
                             <h6 style={{ fontSize: "small" }}>
                               Total Price Included GST
                             </h6>
-                            <p style={{ fontWeight: "bold" }}>₹ 11,500</p>
+                            <p style={{ fontWeight: "bold" }}>₹{item?.price}</p>
                             <button
                               className="btn btn-primary btn-sm"
                               style={{
@@ -928,22 +867,32 @@ const ServicePR = () => {
 
                       {/* Middle: Features */}
                       <Grid item xs={12} sm={4}>
-                        <Typography variant="p">Distribution Outlets</Typography>
-                        <Typography variant="h6" fontWeight="bold">150+</Typography>
+                        <Typography variant="p">
+                          Distribution Outlets
+                        </Typography>
+                        <Typography variant="h6" fontWeight="bold">
+                          150+
+                        </Typography>
                       </Grid>
                       <Grid item xs={12} sm={4}>
                         <Typography variant="p">Language</Typography>
-                        <Typography variant="h6" fontWeight="bold">English, Hindi, Others</Typography>
+                        <Typography variant="h6" fontWeight="bold">
+                          English, Hindi, Others
+                        </Typography>
                       </Grid>
 
                       <Grid item xs={12} sm={4}>
                         <Typography variant="p">Delivery</Typography>
-                        <Typography variant="h6" fontWeight="bold">Same Day</Typography>
+                        <Typography variant="h6" fontWeight="bold">
+                          Same Day
+                        </Typography>
                       </Grid>
 
                       <Grid item xs={12} sm={4}>
                         <Typography variant="p">Geo-Tagging</Typography>
-                        <Typography variant="h6" fontWeight="bold">Yes</Typography>
+                        <Typography variant="h6" fontWeight="bold">
+                          Yes
+                        </Typography>
                       </Grid>
                     </Grid>
                   </CardContent>
