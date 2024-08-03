@@ -315,9 +315,12 @@ export const OurMoreServicesDesign = (
                     <Col key={index} md={3} xs={6}>
                       <div
                         className="servicesList"
-                        onClick={() => {
-                          WindowOpenLink("/projectCreation", "_self");
-                        }}
+                        onClick={() =>
+                          WindowOpenLink(
+                            res.name === "PR" ? "/pr" : "/projectCreation",
+                            "_self"
+                          )
+                        }
                       >
                         <img src={res.image} alt="" className="serviceImage" />
                         <div className="serviceImageText">{res.name}</div>
@@ -329,9 +332,12 @@ export const OurMoreServicesDesign = (
                     <Col key={index} md={3} xs={6}>
                       <div
                         className="servicesList"
-                        onClick={() => {
-                          WindowOpenLink("/projectCreation", "_self");
-                        }}
+                        onClick={() =>
+                          WindowOpenLink(
+                            res.name === "PR" ? "/pr" : "/projectCreation",
+                            "_self"
+                          )
+                        }
                       >
                         <img src={res.image} alt="" className="serviceImage" />
                         <div className="serviceImageText">{res.name}</div>

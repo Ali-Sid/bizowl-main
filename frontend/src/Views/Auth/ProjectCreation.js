@@ -162,7 +162,7 @@ const ProjectCreation = () => {
           const user = userCredential.user;
   
           if (user) {
-            userDetails.uid = user.uid; // Add user ID after successful creation
+            userDetails.uid = user.uid;
   
             // 3. Create User Document (Concise and Error Handling)
             const userDocRef = collection(primaryDB, "quotations");

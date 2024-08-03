@@ -92,14 +92,14 @@ const AuthNavigation = () => {
             />
           }
         />
-        <Route
+        {/* <Route
           exact
           path="/pressReleaseForm"
           name="Project Creation"
           element={
             <ProtectedRoutes Component={FirstForm} accessRights={"guest"} />
           }
-        />
+        /> */}
         <Route
           exact
           path="/privacyPolicy"
@@ -151,6 +151,14 @@ const AuthNavigation = () => {
           name="ServicePR"
           element={
             <ProtectedRoutes Component={ServicePR} accessRights={"guest"} />
+          }
+        />
+        <Route
+          exact
+          path="/pr"
+          name="PRForm"
+          element={
+            <ProtectedRoutes Component={FirstForm} accessRights={"guest"} />
           }
         />
         <Route

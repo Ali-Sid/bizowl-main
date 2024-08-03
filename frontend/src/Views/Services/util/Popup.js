@@ -1,71 +1,62 @@
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 import thumbsup from "../assets/thumbsup.png";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Popup() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    // Automatically open the modal after 2 seconds
+    // Automatically open the dialog after 2 seconds
     const timer = setTimeout(() => {
-      onOpen();
+      setOpen(true);
     }, 2000);
 
     return () => clearTimeout(timer); // Clean up the timer on unmount
-  }, [onOpen]);
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalBody
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <img style={{ width: "250px" }} src={thumbsup} alt="thumbsup" />
-            <Heading>Please Note!</Heading>
-            <Text>
-              Sometimes the final prices of the quotations will be updated
-              within 1-2 hrs. You will be notified on your WhatsApp. If you have
-              any questions you can reach out to us at contact@bizzowl.com or
-              call us at +919354651433.{" "}
-            </Text>
-          </ModalBody>
-
-          {/* <ModalFooter
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Okay
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter> */}
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogContent
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div style={{textAlign: "right", width: "100%"}}><CloseIcon onClick={handleClose} sx={{cursor: "pointer"}} /></div>
+        <img style={{ width: 250 }} src={thumbsup} alt="thumbsup" />
+        <DialogTitle id="alert-dialog-title">Please Note!</DialogTitle>
+        <DialogContentText id="alert-dialog-description">
+          Sometimes the final prices of the quotations will be updated within
+          1-2 hrs. You will be notified on your WhatsApp. If you have any
+          questions you can reach out to us at contact@bizzowl.com or call us at
+          +919354651433.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Okay</Button>
+      </DialogActions>
+    </Dialog>
   );
 }
+
 export default Popup;
