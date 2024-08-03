@@ -42,10 +42,10 @@ const ServicePR = () => {
   const [comparisonTrayVisible, setComparisonTrayVisible] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const [partners, setPartners] = useState([]);
+  const [showMoreContent, setShowMoreContent] = useState(null);
   const navigate = useNavigate();
 
   const isMobile = useMediaQuery("(max-width:768px)");
-
 
   const whyChooseBizowl = [
     {
@@ -92,7 +92,9 @@ const ServicePR = () => {
   useEffect(() => {
     const fetchPartners = async () => {
       try {
-        const querySnapshot = await getDocs(collection(partnerDB, "prServices"));
+        const querySnapshot = await getDocs(
+          collection(partnerDB, "prServices")
+        );
         const getPartners = querySnapshot.docs.map((doc) => {
           const data = doc.data();
           const letters = [
@@ -106,7 +108,7 @@ const ServicePR = () => {
             borderColor: getRandomColor(),
           };
         });
-        console.log('Mapped Partners Data:', getPartners);
+        console.log("Mapped Partners Data:", getPartners);
         setPartners(getPartners);
       } catch (error) {
         console.error("Error fetching partners data:", error);
@@ -115,8 +117,8 @@ const ServicePR = () => {
 
     const getRandomColor = () => {
       const h = Math.floor(Math.random() * 360);
-      const s = Math.floor(Math.random() * 100);
-      const l = Math.floor(Math.random() * 100);
+      const s = Math.floor(Math.random() * 80 + 20);
+      const l = Math.floor(Math.random() * 30 + 50);
       return `hsl(${h}, ${s}%, ${l}%)`;
     };
     fetchPartners();
@@ -178,6 +180,47 @@ const ServicePR = () => {
       }
       return newServices;
     });
+  };
+
+  const handleClick = (item) => {
+    if (showMoreContent === item.id) {
+      setShowMoreContent(null);
+    } else {
+      setShowMoreContent(item.id);
+    }
+  };
+
+  const handleContent = (item) => {
+    return (
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "20px 0 20px 0",
+        }}
+      >
+        <h6>Additional Content</h6>
+        <p><b>Images:</b> {item?.images}</p>
+        <p><b>Distribution Medium:</b> {item?.distributionMedium}</p>
+        <p><b>Google News Tagging:</b> {item?.googleNewsTagging ? "Yes" : "No"}</p>
+        <p><b>IANS, PTI, ENI, UNS:</b> {item?.ian}</p>
+        <p><b>Index on Search Engine:</b> {item?.indexOnSearchEngine}</p>
+        <p><b>Links:</b> {item?.links}</p>
+        <p><b>logo Branding:</b> {item?.logoBranding}</p>
+        <p><b>Minimum Links:</b> {item?.minLinks}</p>
+        <p><b>Mobile News Aggregator:</b> {item?.mobileNewsAggregator ? "Yes" : "No"}</p>
+        <p><b>News Site Placement:</b> {item?.newsSitePlacement}</p>
+        <p><b>PR Writing:</b> {item?.prWriting ? "Yes" : "No"}</p>
+        <p><b>Proof Read:</b> {item?.proofRead ? "Yes" : "No"}</p>
+        <p><b>Guarantee Publish:</b> {item?.publishGuarantee}</p>
+        <p><b>Same Day Distribution:</b> {item?.sameDayDistribution ? "Yes" : "No"}</p>
+        <p><b>SEO:</b> {item?.seo}</p>
+        <p><b>Specific Industry:</b> {item?.specificIndustry ? "Yes" : "No"}</p>
+        <p><b>Words Limit:</b> {item?.wordsLimit}</p>
+      </div>
+    );
   };
 
   return (
@@ -458,7 +501,9 @@ const ServicePR = () => {
                         <div className="d-flex flex-column align-items-start">
                           <div className="d-flex flex-column align-items-start">
                             <h6>Distribution Outlets</h6>
-                            <p style={{ fontWeight: "bold" }}>{item?.outlets}</p>
+                            <p style={{ fontWeight: "bold" }}>
+                              {item?.outlets}
+                            </p>
                           </div>
                           <div
                             className="d-flex flex-column align-items-start"
@@ -479,11 +524,15 @@ const ServicePR = () => {
                         >
                           <div>
                             <h6>Delivery</h6>
-                            <p style={{ fontWeight: "bold" }}>{item?.delivery}</p>
+                            <p style={{ fontWeight: "bold" }}>
+                              {item?.delivery}
+                            </p>
                           </div>
                           <div>
                             <h6>Geo-Tagging</h6>
-                            <p style={{ fontWeight: "bold" }}>{item?.geoTag ? "Yes" : "No"}</p>
+                            <p style={{ fontWeight: "bold" }}>
+                              {item?.geoTag ? "Yes" : "No"}
+                            </p>
                           </div>
                         </div>
                         <div
@@ -532,6 +581,7 @@ const ServicePR = () => {
                             viewBox="0 0 48 48"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
+                            onClick={() => handleClick(item)}
                           >
                             <path
                               d="M40 28L24 40L8 28"
@@ -576,6 +626,7 @@ const ServicePR = () => {
                         </div>
                       </div>
                     </div>
+                    {showMoreContent === item.id && handleContent(item)}
                   </div>
                 </div>
               ))}
@@ -682,7 +733,7 @@ const ServicePR = () => {
                               borderColor: service.borderColor,
                               borderRadius: "0.5rem",
                               padding: "0.5rem",
-                              width: !isMobile && "100%",
+                              // width: !isMobile && "100%",
                               height: "50px",
                               fontSize: "large",
                               backgroundColor: "#F7FCFB",
@@ -697,12 +748,12 @@ const ServicePR = () => {
                                   style={{
                                     fontWeight: "bold",
                                     fontSize: isMobile ? "1rem" : "2rem",
-                                    color: letter.color1,
+                                    color: letter.color,
                                   }}
                                 >
-                                  {letter.letter1}
+                                  {letter.letter}
                                 </span>
-                                <span
+                                {/* <span
                                   style={{
                                     fontWeight: "bold",
                                     fontSize: isMobile ? "1rem" : "2rem",
@@ -719,13 +770,13 @@ const ServicePR = () => {
                                   }}
                                 >
                                   {letter.letter3}
-                                </span>
+                                </span> */}
                               </div>
                             ))}
                           </div>
-                          <p style={{ color: "#407BFF", fontSize: "small" }}>
+                          {/* <p style={{ color: "#407BFF", fontSize: "small" }}>
                             Portfolio
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                       {/* Additional card structure and content */}
@@ -792,10 +843,10 @@ const ServicePR = () => {
               marginTop: "20px",
             }}
           >
-            {partners.map((item, index) => (
+            {partners.map((item) => (
               <Center>
                 <Card
-                  key={index}
+                  key={item.id}
                   sx={{
                     marginBottom: 2,
                     maxWidth: "70%",
@@ -835,12 +886,12 @@ const ServicePR = () => {
                                     style={{
                                       fontWeight: "bold",
                                       fontSize: "1.5rem", // Adjusted font size
-                                      color: letter?.color1,
+                                      color: letter?.color,
                                     }}
                                   >
-                                    {letter?.letter1}
+                                    {letter?.letter}
                                   </span>
-                                  <span
+                                  {/* <span
                                     style={{
                                       fontWeight: "bold",
                                       fontSize: "1.5rem", // Adjusted font size
@@ -857,7 +908,7 @@ const ServicePR = () => {
                                     }}
                                   >
                                     {letter?.letter3}
-                                  </span>
+                                  </span> */}
                                 </Typography>
                               ))}
                             </Box>
@@ -933,6 +984,44 @@ const ServicePR = () => {
                         }
                       />
                       <Typography>Add To Compare</Typography>
+                    </div>
+                    <div
+                      style={{
+                        // width: "50%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 48 48"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={() => handleClick(item)}
+                      >
+                        <path
+                          d="M40 28L24 40L8 28"
+                          stroke="#1C6ED0"
+                          stroke-width="4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M8 10H40"
+                          stroke="#1C6ED0"
+                          stroke-width="4"
+                          stroke-linecap="round"
+                        />
+                        <path
+                          d="M8 18H40"
+                          stroke="#1C6ED0"
+                          stroke-width="4"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                      {showMoreContent === item.id && handleContent(item)}
                     </div>
                   </CardContent>
                 </Card>
