@@ -107,7 +107,7 @@ const CompareServices = () => {
           </div>
         </div>
       </div>
-      <div style={{ height: "90vh" }}>
+      <div style={{ height: "90vh", margin: "50px" }}>
         <div style={{ height: "30%", margin: "20px" }}>
           <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
             <div>

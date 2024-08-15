@@ -115,7 +115,7 @@ const ServicePR = () => {
           borderColor: getRandomColor(),
         };
       });
-      console.log(formData.budget, "ffffffffffffff");
+      console.log(formData.priceRange, "ffffffffffffff");
 
       // Filter partners based on budget
       // let filteredPartners = getPartners;
@@ -131,28 +131,36 @@ const ServicePR = () => {
       //   );
       // }
 
-      const budgetLimit = formData.budget; // Assuming formData.budget is defined
+      const budgetLimit = formData.priceRange; // Assuming formData.priceRange is defined
+      const industrySet = formData.industry;
+      const deliveryMatch = formData.deliveryTime;
       console.log(budgetLimit, "budgetLimit");
 
-      let filteredPartners = getPartners.filter((partner) => {
-        // Check if any package price is less than or equal to the budget limit
-        const isWithinBudget = partner.packages.some((p) => {
-          const packagePrice = p.features.price; // Access the price of the current package
-          console.log(packagePrice, "Package Price"); // Log the package price
-          return packagePrice <= budgetLimit; // Check if the price is within the budget
-        });
+      const filteredPartners = getPartners.filter((partner) => {
+        const isWithinBudget = budgetLimit
+          ? partner.packages.every((p) => p.features.price <= budgetLimit)
+          : true;
 
-        // Log the partner data
-        console.log(partner, "getPartners' data");
+        const isIndustryMatch = formData.industry
+          ? partner.packages.some((p) =>
+              p.features.industrySpecific
+                .toLowerCase()
+                .includes(formData.industry.toLowerCase())
+            )
+          : true;
 
-        return isWithinBudget; // Return true if any package is within budget
+        const isDeliveryTimeMatch = formData.deliveryTime
+          ? partner.packages.some(
+              (p) => p.features.deliveryTime === formData.deliveryTime
+            )
+          : true;
+
+        return isWithinBudget || isIndustryMatch || isDeliveryTimeMatch;
       });
 
-      // Log the filtered partners
       console.log("Filtered Partners:", filteredPartners);
 
-      // Set the filtered partners to state
-      setPartners(filteredPartners).then(console.log(partners, "after effects"))
+      setPartners(filteredPartners);
 
       // let filteredPartners = getPartners;
       // console.log(filteredPartners.length, "lengthhhh");
@@ -189,8 +197,6 @@ const ServicePR = () => {
       console.error("Error fetching partners data:", error);
     }
 
-    console.log("Mapped Partners Data:", sortedPartners);
-    setPartners(sortedPartners); // Remove this line
     // } catch (error) {
     //   console.error("Error fetching partners data:", error);
     // }
