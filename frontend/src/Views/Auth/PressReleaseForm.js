@@ -4,20 +4,79 @@ import image from "./assets/image.svg";
 import talkExpert from "./assets/talkToExpert.svg";
 import percentage from "./assets/percentage.svg";
 import { Helmet } from "react-helmet";
-import "../../Styles/pr.css"
+import "../../Styles/pr.css";
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
+import { primaryDB } from "../../config/firebase";
+import useFormData from "../Services/util/useFormData";
 
 const FirstForm = () => {
+  const { updateFormData } = useFormData();
+  const [pressReleaseReady, setPressReleaseReady] = useState("Yes");
+  const [pressReleasePurpose, setPressReleasePurpose] = useState("Product Launch");
+  const [budget, setBudget] = useState("");
+  const [targetAudience, setTargetAudience] = useState("General Public");
+  const [geoTarget, setGeoTarget] = useState("National");
+  const [language, setLanguage] = useState("Hindi");
+  const [industry, setIndustry] = useState("Healthcare");
+  const [deliveryTime, setDeliveryTime] = useState("Same day");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
   const [currStep, setCurrStep] = useState(1);
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    navigate('/pr/service')
-  }
+  const handlePressReleaseReadyChange = (e) =>
+    setPressReleaseReady(e.target.value);
+  const handlePressReleasePurposeChange = (e) =>
+    setPressReleasePurpose(e.target.value);
+  const handleBudgetChange = (e) => setBudget(e.target.value);
+  const handleTargetAudienceChange = (e) => setTargetAudience(e.target.value);
+  const handleGeoTargetChange = (e) => setGeoTarget(e.target.value);
+  const handleLanguageChange = (e) => setLanguage(e.target.value);
+  const handleIndustryChange = (e) => setIndustry(e.target.value);
+  const handleDeliveryTimeChange = (e) => setDeliveryTime(e.target.value);
+  const handleFirstNameChange = (e) => setFirstName(e.target.value);
+  const handleLastNameChange = (e) => setLastName(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
+  const handleCompanyChange = (e) => setCompany(e.target.value);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userData = {
+      pressReleaseReady,
+      pressReleasePurpose,
+      budget,
+      targetAudience,
+      geoTarget,
+      language,
+      industry,
+      deliveryTime,
+      firstName,
+      lastName,
+      email,
+      phone,
+      company,
+    };
+  
+    try {
+      const docRef = await addDoc(collection(primaryDB, "prUsers"), userData);
+      console.log("Document written with ID: ", docRef.id);
+      console.log(userData, "asdasdadasd");
+      updateFormData(userData);
+      navigate("/pr/service");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   const handleNext = () => {
     setCurrStep(2);
   };
+
   return (
     <>
       <Helmet>
@@ -100,7 +159,7 @@ const FirstForm = () => {
             <span className="text-[#1C6ED0] ">Best Deals and Expertise</span>
           </p>
           <ul className="flex list-disc gap-4 sm:gap-6 text-[#1C6ED0] text-[12px] justify-center">
-            <li>Product Lauch</li>
+            <li>Product Launch</li>
             <li>Events</li>
             <li>Fundraise Announcement</li>
           </ul>
@@ -194,7 +253,10 @@ const FirstForm = () => {
                     <select
                       id="pressReleaseReady"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handlePressReleaseReadyChange}
+                      value={pressReleaseReady}
                     >
+                      <option value="">Select an option</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
@@ -205,7 +267,10 @@ const FirstForm = () => {
                     <select
                       id="pressReleasePurpose"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handlePressReleasePurposeChange}
+                      value={pressReleasePurpose}
                     >
+                      <option value="">Select an option</option>
                       <option value="productLaunch">Product Launch</option>
                       <option value="eventAnnouncement">
                         Event Announcement
@@ -224,9 +289,11 @@ const FirstForm = () => {
                     Budget
                     <br />
                     <input
-                      type="text"
+                      type="number"
                       id="budget"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handleBudgetChange}
+                      value={budget}
                     />
                   </label>
                   <label htmlFor="targetAudience">
@@ -235,7 +302,10 @@ const FirstForm = () => {
                     <select
                       id="targetAudience"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handleTargetAudienceChange}
+                      value={targetAudience}
                     >
+                      <option value="">Select an option</option>
                       <option value="generalPublic">General Public</option>
                       <option value="healthcareProfessionals">
                         Healthcare Professionals
@@ -248,7 +318,10 @@ const FirstForm = () => {
                     <select
                       id="geographicalTarget"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handleGeoTargetChange}
+                      value={geoTarget}
                     >
+                      <option value="">Select an option</option>
                       <option value="national">National</option>
                       <option value="international">International</option>
                       <option value="local">Local</option>
@@ -260,7 +333,10 @@ const FirstForm = () => {
                     <select
                       id="language"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handleLanguageChange}
+                      value={language}
                     >
+                      <option value="">Select an option</option>
                       <option value="hindi">Hindi</option>
                       <option value="english">English</option>
                       <option value="other">Other</option>
@@ -272,10 +348,14 @@ const FirstForm = () => {
                     <select
                       id="industry"
                       className="bg-[#18141f05] w-[300px]  h-[30px]  text-[grey]"
+                      onChange={handleIndustryChange}
+                      value={industry}
                     >
+                      <option value="">Select an option</option>
                       <option value="healthcare">Healthcare</option>
                       <option value="it">IT</option>
-                      <option value="defense">Defense</option>
+                      <option value="education">Education</option>
+                      <option value="other">Other</option>
                     </select>
                   </label>
                   <label htmlFor="deliveryTime">
@@ -284,7 +364,10 @@ const FirstForm = () => {
                     <select
                       id="deliveryTime"
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
+                      onChange={handleDeliveryTimeChange}
+                      value={deliveryTime}
                     >
+                      <option value="">Select an option</option>
                       <option value="sameDay">Same day</option>
                       <option value="1Day">1 day</option>
                       <option value="2Day">2 days</option>
@@ -309,6 +392,8 @@ const FirstForm = () => {
                     <input
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
                       placeholder="Enter your first name here"
+                      onChange={handleFirstNameChange}
+                      value={firstName}
                     />
                   </label>
                   <label>
@@ -317,6 +402,8 @@ const FirstForm = () => {
                     <input
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
                       placeholder="Enter your last name here"
+                      onChange={handleLastNameChange}
+                      value={lastName}
                     />
                   </label>
                   <label>
@@ -325,6 +412,8 @@ const FirstForm = () => {
                     <input
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
                       placeholder="Enter your email here"
+                      onChange={handleEmailChange}
+                      value={email}
                     />
                   </label>
                   <label>
@@ -333,6 +422,8 @@ const FirstForm = () => {
                     <input
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
                       placeholder="Enter your phone number here"
+                      onChange={handlePhoneChange}
+                      value={phone}
                     />
                   </label>
                   <label>
@@ -341,9 +432,11 @@ const FirstForm = () => {
                     <input
                       className="bg-[#18141f05] w-[300px] text-[grey] h-[30px]"
                       placeholder="Enter your company name here"
+                      onChange={handleCompanyChange}
+                      value={company}
                     />
                   </label>
-                  <button className="flex bg-[#1C6ED0] w-fit text-white px-7 py-1 rounded-sm">
+                  <button type="submit" className="flex bg-[#1C6ED0] w-fit text-white px-7 py-1 rounded-sm">
                     View plans
                   </button>
                   <br />

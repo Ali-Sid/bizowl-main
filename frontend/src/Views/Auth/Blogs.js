@@ -60,6 +60,18 @@ const Blogs = () => {
         "Discover 21 powerful benefits of press release distribution that can elevate your brand's visibility and credibility. Learn how press releases can boost SEO, build trust, and drive traffic.",
       date: "24-Jul-2024",
     },
+    {
+      id: 3,
+      icon: "https://res.cloudinary.com/dr1pmtefx/image/upload/v1723669728/bizowl-blog-3_vwmmib.png",
+      jobTitle: "Public Relations",
+      tag: "pr",
+      urlTitle: "best-press-release-distribution-services",
+      title:
+        "Finding the Best Press Release Distribution Services: A Comprehensive Guide",
+      description:
+        "Discover the best press release distribution services to boost your media coverage and online presence. Learn key factors to consider and how Bizowl simplifies the process.",
+      date: "15-Aug-2024",
+    },
     // Add more blog posts here
   ];
 
