@@ -166,7 +166,7 @@ const ProjectCreation = () => {
   
             // 3. Create User Document (Concise and Error Handling)
             const userDocRef = collection(primaryDB, "quotations");
-            await addDoc(userDocRef, { ...userDetails }); // Add all user details together
+            await addDoc(userDocRef, { ...userDetails }, {createdAt: serverTimestamp()}); // Add all user details together
 
             // New code to send user details to the secondary project
             // const secondaryUserDocRef = collection(adminDB, "userQuotations");
@@ -176,12 +176,12 @@ const ProjectCreation = () => {
           // 4.1 Create Roles Document (Conditional Based on User Type)
           // if (/* condition for assigning "Customer" role */) { // Add check for role assignment
             const rolesRef = collection(primaryDB, "roles");
-            await addDoc(rolesRef, { uid: user.uid, role: "Customer" });
+            await addDoc(rolesRef, { uid: user.uid, role: "Customer" }, {createdAt: serverTimestamp()});
           // }
           // 4.2 Create Roles Document for adminDB (Conditional Based on User Type)
           // if (/* condition for assigning "Customer" role */) { // Add check for role assignment
           const adminRolesRef = collection(adminDB, "roles");
-          await addDoc(adminRolesRef, { uid: user.uid, role: "Customer" });
+          await addDoc(adminRolesRef, { uid: user.uid, role: "Customer" }, {createdAt: serverTimestamp()});
         // }
         } catch (error) {
           if (error.code === "auth/email-already-in-use") {
@@ -214,7 +214,7 @@ const ProjectCreation = () => {
         competitor: values?.competitor,
         businessDescription: values?.businessDescription,
         hearAboutUs: values?.hearAboutUs,
-      });
+      }, {createdAt: serverTimestamp()});
 
       // 5.2 Create Quotation Document for AdminDB (Refactored and Secured)
       const adminDocRef = collection(adminDB, "userQuotations");
@@ -231,7 +231,7 @@ const ProjectCreation = () => {
         competitor: values?.competitor,
         businessDescription: values?.businessDescription,
         hearAboutUs: values?.hearAboutUs,
-      });
+      }, {createdAt: serverTimestamp()});
   
       // 6. Navigation on Success
       navigate("/service"); // Assuming "/service" is the services page path

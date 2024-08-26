@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//assets
 import BizowalLogo from "./assets/logo-of-BIZOWL--Business-Services.png";
 import PhonePic from "./assets/Vector (1).png";
 import MessageImg from "./assets/Vector (2).png";
@@ -34,8 +33,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { partnerDB } from "../../config/firebase";
+import useFormData from "./util/useFormData";
+// import useFormData from "../Auth/context/formDataContext";
 
 const ServicePR = () => {
+  const { formData } = useFormData();
   const [ratings, setRatings] = useState(5);
   const [services, setServices] = useState(6);
   const [isChecked, setIsChecked] = useState({});
@@ -43,9 +45,13 @@ const ServicePR = () => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [partners, setPartners] = useState([]);
   const [showMoreContent, setShowMoreContent] = useState(null);
+  const [isFormDataReady, setIsFormDataReady] = useState(false);
+  const [sortedPartners, setSortedPartners] = useState([]);
   const navigate = useNavigate();
 
   const isMobile = useMediaQuery("(max-width:768px)");
+
+  console.log("qwerty1: ", formData);
 
   const whyChooseBizowl = [
     {
@@ -89,40 +95,135 @@ const ServicePR = () => {
     "rgba(255, 249, 234, 0.8)",
   ];
 
-  useEffect(() => {
-    const fetchPartners = async () => {
-      try {
-        const querySnapshot = await getDocs(
-          collection(partnerDB, "prServices")
-        );
-        const getPartners = querySnapshot.docs.map((doc) => {
-          const data = doc.data();
-          const letters = [
-            { letter: data.displayName, color: getRandomColor() },
-          ];
-          return {
-            ...data,
-            id: data.id,
-            letters,
-            bgColor: colors[Math.floor(Math.random() * colors.length)],
-            borderColor: getRandomColor(),
-          };
-        });
-        console.log("Mapped Partners Data:", getPartners);
-        setPartners(getPartners);
-      } catch (error) {
-        console.error("Error fetching partners data:", error);
-      }
-    };
+  const fetchPartners = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(partnerDB, "prData"));
+      const getPartners = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        const letters = [
+          {
+            letter: data.name.substring(0, 3).toUpperCase(),
+            color: getRandomColor(),
+          },
+        ];
 
-    const getRandomColor = () => {
-      const h = Math.floor(Math.random() * 360);
-      const s = Math.floor(Math.random() * 80 + 20);
-      const l = Math.floor(Math.random() * 30 + 50);
-      return `hsl(${h}, ${s}%, ${l}%)`;
-    };
+        return {
+          ...data,
+          id: data.id,
+          letters,
+          bgColor: colors[Math.floor(Math.random() * colors.length)],
+          borderColor: getRandomColor(),
+        };
+      });
+      console.log(formData.priceRange, "ffffffffffffff");
+
+      // Filter partners based on budget
+      // let filteredPartners = getPartners;
+      // let d = getPartners.filter((p) =>
+      //   console.log(p, "getPartners k andar ka data")
+      // );
+      // console.log(getPartners, "d se pehle ka data");
+      // console.log(d, "d wala data");
+
+      // if (formData.budget) {
+      //   filteredPartners = filteredPartners.filter(
+      //     (partner) => partner.packages[0].features.price <= formData.budget
+      //   );
+      // }
+
+      const budgetLimit = formData.priceRange;
+      const industrySet = formData.industry;
+      const deliveryMatch = formData.deliveryTime;
+      console.log(budgetLimit, "budgetLimit");
+
+      const filteredPartners = getPartners.filter((partner) => {
+        const isWithinBudget = budgetLimit
+          ? partner.packages.every((p) => p.features.price <= budgetLimit)
+          : true;
+
+        const isIndustryMatch = formData.industry
+          ? partner.packages.some((p) =>
+              p.features.industrySpecific
+                .toLowerCase()
+                .includes(formData.industry.toLowerCase())
+            )
+          : true;
+
+        const isDeliveryTimeMatch = formData.deliveryTime
+          ? partner.packages.some(
+              (p) => p.features.deliveryTime === formData.deliveryTime
+            )
+          : true;
+
+        return isWithinBudget || isIndustryMatch || isDeliveryTimeMatch;
+      });
+
+      console.log("Filtered Partners:", filteredPartners);
+
+      setPartners(filteredPartners);
+
+      // let filteredPartners = getPartners;
+      // console.log(filteredPartners.length, "lengthhhh");
+      // console.log(filteredPartners, "filteredPartners");
+
+      // if (formData.industry) {
+      //   filteredPartners = filteredPartners.filter((partner) =>
+      //     partner.industrySpecific
+      //       .toLowerCase()
+      //       .includes(formData.industry.toLowerCase())
+      //   );
+      // }
+
+      // try {
+      // var sortedPartners = filteredPartners;
+
+      // if (formData) {
+      //   console.log("Sorting by budget");
+      //   console.log(filteredPartners, "updatedFilteredArray")
+      //   setSortedPartners(
+      //     filteredPartners.sort((a, b) => {
+      //       console.log(
+      //         `Comparing ${a?.packages[0].features.budget} and ${b?.packages[0].features.budget}`
+      //       );
+      //       if (a?.packages[0].features.budget < b?.packages[0].features.budget)
+      //         return -1;
+      //       if (a?.packages[0].features.budget > b?.packages[0].features.budget)
+      //         return 1;
+      //       return 0;
+      //     })
+      //   );
+      // }
+    } catch (error) {
+      console.error("Error fetching partners data:", error);
+    }
+
+    // } catch (error) {
+    //   console.error("Error fetching partners data:", error);
+    // }
+  };
+
+  const getRandomColor = () => {
+    const h = Math.floor(Math.random() * 360);
+    const s = Math.floor(Math.random() * 80 + 20);
+    const l = Math.floor(Math.random() * 30 + 50);
+    return `hsl(${h}, ${s}%, ${l}%)`;
+  };
+
+  useEffect(() => {
     fetchPartners();
   }, []);
+
+  useEffect(() => {
+    if (formData && Object.keys(formData).length > 0) {
+      setIsFormDataReady(true);
+    }
+  }, [formData]);
+
+  // if (!isFormDataReady) {
+  //   return <div>Loading...</div>;
+  // }
+
+  console.log("formData: ", formData);
 
   const handleCheckboxChange = (event, serviceId) => {
     if (selectedServices.length >= 3 && event.target.checked) {
@@ -202,24 +303,77 @@ const ServicePR = () => {
         }}
       >
         <h6>Additional Content</h6>
-        <p><b>Images:</b> {item?.images}</p>
-        <p><b>Distribution Medium:</b> {item?.distributionMedium}</p>
-        <p><b>Google News Tagging:</b> {item?.googleNewsTagging ? "Yes" : "No"}</p>
-        <p><b>IANS, PTI, ENI, UNS:</b> {item?.ian}</p>
-        <p><b>Index on Search Engine:</b> {item?.indexOnSearchEngine}</p>
-        <p><b>Links:</b> {item?.links}</p>
-        <p><b>logo Branding:</b> {item?.logoBranding}</p>
-        <p><b>Minimum Links:</b> {item?.minLinks}</p>
-        <p><b>Mobile News Aggregator:</b> {item?.mobileNewsAggregator ? "Yes" : "No"}</p>
-        <p><b>News Site Placement:</b> {item?.newsSitePlacement}</p>
-        <p><b>PR Writing:</b> {item?.prWriting ? "Yes" : "No"}</p>
-        <p><b>Proof Read:</b> {item?.proofRead ? "Yes" : "No"}</p>
-        <p><b>Guarantee Publish:</b> {item?.publishGuarantee}</p>
-        <p><b>Same Day Distribution:</b> {item?.sameDayDistribution ? "Yes" : "No"}</p>
-        <p><b>SEO:</b> {item?.seo}</p>
-        <p><b>Specific Industry:</b> {item?.specificIndustry ? "Yes" : "No"}</p>
-        <p><b>Words Limit:</b> {item?.wordsLimit}</p>
+        <p>
+          <b>Images:</b> {item?.packages[0].features.imageIncluded}
+        </p>
+        <p>
+          <b>Distribution Medium:</b>{" "}
+          {item?.packages[0].features.mediumOfDistribution.map((e) => e)}
+        </p>
+        <p>
+          <b>Google News Tagging:</b>{" "}
+          {item?.packages[0].features.googleNewsTagging}
+        </p>
+        <p>
+          <b>Network:</b> {item?.packages[0].features.network.map((e) => e)}
+        </p>
+        <p>
+          <b>Index on Search Engine:</b>{" "}
+          {item?.packages[0].features.indexOnSearchEngines}
+        </p>
+        <p>
+          <b>Links:</b> {item?.packages[0].features.links}
+        </p>
+        <p>
+          <b>Minimum Links:</b> {item?.packages[0].features.minimumOnlineLinks}
+        </p>
+        <p>
+          <b>Mobile News Aggregator:</b>{" "}
+          {item?.packages[0].features.mobileNewsAggregator}
+        </p>
+        <p>
+          <b>News Site Placement:</b>{" "}
+          {item?.packages[0].features.newsSitePlacement.map((e) => e)}
+        </p>
+        <p>
+          <b>PR Writing:</b> {item?.packages[0].features.prWriting}
+        </p>
+        <p>
+          <b>Proof Read:</b> {item?.packages[0].features.proofRead}
+        </p>
+        <p>
+          <b>Guarantee Publish:</b>{" "}
+          {item?.packages[0].features.publishGuarantee}
+        </p>
+        <p>
+          <b>SEO:</b> {item?.packages[0].features.seo}
+        </p>
+        <p>
+          <b>Specific Industry:</b>{" "}
+          {item?.packages[0].features.industrySpecific}
+        </p>
+        <p>
+          <b>Words Limit:</b> {item?.packages[0].features.wordsLimit}
+        </p>
       </div>
+    );
+  };
+
+  const MiddleLetterStyled = ({ letter }) => {
+    // Calculate the middle index of the string
+    const middleIndex = Math.floor(letter.letter.length / 2);
+
+    // Split the string into beginning, middle, and end parts
+    const beginningPart = letter.letter.substring(0, middleIndex);
+    const middleLetter = letter.letter[middleIndex];
+    const endPart = letter.letter.substring(middleIndex + 1);
+
+    return (
+      <span style={{ fontWeight: "bold", fontSize: "2rem" }}>
+        {beginningPart}
+        <span style={{ color: letter.color }}>{middleLetter}</span>
+        {endPart}
+      </span>
     );
   };
 
@@ -443,15 +597,7 @@ const ServicePR = () => {
                       >
                         {item?.letters.map((letter, index) => (
                           <div key={index} style={{ letterSpacing: "10px" }}>
-                            <span
-                              style={{
-                                fontWeight: "bold",
-                                fontSize: "2rem",
-                                color: letter?.color,
-                              }}
-                            >
-                              {letter?.letter}
-                            </span>
+                            <MiddleLetterStyled letter={letter} />
                             {/* <span
                               style={{
                                 fontWeight: "bold",
@@ -502,7 +648,7 @@ const ServicePR = () => {
                           <div className="d-flex flex-column align-items-start">
                             <h6>Distribution Outlets</h6>
                             <p style={{ fontWeight: "bold" }}>
-                              {item?.outlets}
+                              {item?.packages[0].features.totalMediaOutlets}
                             </p>
                           </div>
                           <div
@@ -525,13 +671,13 @@ const ServicePR = () => {
                           <div>
                             <h6>Delivery</h6>
                             <p style={{ fontWeight: "bold" }}>
-                              {item?.delivery}
+                              {item?.packages[0].features.deliveryTime}
                             </p>
                           </div>
                           <div>
                             <h6>Geo-Tagging</h6>
                             <p style={{ fontWeight: "bold" }}>
-                              {item?.geoTag ? "Yes" : "No"}
+                              {item?.packages[0].features.geoTag}
                             </p>
                           </div>
                         </div>
@@ -546,7 +692,9 @@ const ServicePR = () => {
                             <h6 style={{ fontSize: "small" }}>
                               Total Price Included GST
                             </h6>
-                            <p style={{ fontWeight: "bold" }}>₹{item?.price}</p>
+                            <p style={{ fontWeight: "bold" }}>
+                              ₹{item?.packages[0].features.price}
+                            </p>
                             <button
                               className="btn btn-primary btn-sm"
                               style={{
@@ -748,10 +896,9 @@ const ServicePR = () => {
                                   style={{
                                     fontWeight: "bold",
                                     fontSize: isMobile ? "1rem" : "2rem",
-                                    color: letter.color,
                                   }}
                                 >
-                                  {letter.letter}
+                                  <MiddleLetterStyled letter={letter} />
                                 </span>
                                 {/* <span
                                   style={{
@@ -885,11 +1032,10 @@ const ServicePR = () => {
                                   <span
                                     style={{
                                       fontWeight: "bold",
-                                      fontSize: "1.5rem", // Adjusted font size
-                                      color: letter?.color,
+                                      fontSize: "1.5rem",
                                     }}
                                   >
-                                    {letter?.letter}
+                                    <MiddleLetterStyled letter={letter} />
                                   </span>
                                   {/* <span
                                     style={{
@@ -922,7 +1068,7 @@ const ServicePR = () => {
                           Distribution Outlets
                         </Typography>
                         <Typography variant="h6" fontWeight="bold">
-                          150+
+                          {item.packages[0].features.totalMediaOutlets}
                         </Typography>
                       </Grid>
                       <Grid item xs={12} sm={4}>
@@ -935,14 +1081,14 @@ const ServicePR = () => {
                       <Grid item xs={12} sm={4}>
                         <Typography variant="p">Delivery</Typography>
                         <Typography variant="h6" fontWeight="bold">
-                          Same Day
+                          {item.packages[0].features.deliveryTime}
                         </Typography>
                       </Grid>
 
                       <Grid item xs={12} sm={4}>
                         <Typography variant="p">Geo-Tagging</Typography>
                         <Typography variant="h6" fontWeight="bold">
-                          Yes
+                          {item.packages[0].features.geoTag}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -956,7 +1102,7 @@ const ServicePR = () => {
                       variant="h6"
                       sx={{ mb: "10px", fontWeight: "bold" }}
                     >
-                      ₹11,500
+                      ₹{item.packages[0].features.price}
                     </Typography>
                     <Button
                       variant="contained"

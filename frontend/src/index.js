@@ -10,6 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { FormDataProvider } from "./Views/Auth/context/formDataContext";
 
 const theme = createTheme({
   config: {
@@ -25,13 +26,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
-            <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <BrowserRouter>
               <App />
-            </BrowserRouter>
-          </PersistGate>
-        </Provider>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );

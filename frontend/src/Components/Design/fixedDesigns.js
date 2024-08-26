@@ -992,7 +992,7 @@ export const ContactUsDesign = () => {
         </div>
       </div>
       <div>
-        <img src="./Images/homepage/contacts.png" className="contactImage" alt="contact" />
+        <img src="Images/homepage/contacts.png" className="contactImage" alt="contact" />
       </div>
     </div>
   );
