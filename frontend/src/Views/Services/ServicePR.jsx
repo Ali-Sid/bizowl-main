@@ -131,7 +131,7 @@ const ServicePR = () => {
       //   );
       // }
 
-      const budgetLimit = formData.priceRange; // Assuming formData.priceRange is defined
+      const budgetLimit = formData.priceRange;
       const industrySet = formData.industry;
       const deliveryMatch = formData.deliveryTime;
       console.log(budgetLimit, "budgetLimit");

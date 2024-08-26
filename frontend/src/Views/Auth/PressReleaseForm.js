@@ -79,7 +79,7 @@ const FirstForm = () => {
     e.preventDefault();
 
     try {
-      const docRef = await addDoc(collection(primaryDB, "prUsers"), formState);
+      const docRef = await addDoc(collection(primaryDB, "prUsers"), formState, {createdAt: serverTimestamp()});
       console.log("Document written with ID: ", docRef.id);
       console.log(formState, "formState data...");
       updateFormData(formState);
